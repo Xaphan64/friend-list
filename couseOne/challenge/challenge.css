@@ -1,0 +1,67 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: white;
+  color: black;
+  transition: 1s;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+#imgSnail {
+  width: 800px;
+  height: 600px;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
+#buttonContainer {
+  display: flex;
+  width: 75%;
+  justify-content: space-between;
+}
+
+#buttonContainer button {
+  cursor: pointer;
+}
+
+#buttonContainer #nightModeBtn {
+  background-color: transparent;
+  border: none;
+  font-size: 32px;
+}
+
+#buttonContainer #randomBtn {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
+#description {
+  width: 75%;
+}
+
+/* DARK MODE */
+
+.darkMode {
+  background-color: black;
+  color: white;
+  transition: 1s;
+}
+
+.darkMode #imgSnail {
+  border: 1px solid white;
+}
+
+.darkmode #buttonContainer #randomBtn {
+  border: 1px solid white;
+}
