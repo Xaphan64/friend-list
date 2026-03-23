@@ -4,10 +4,10 @@ function handleRandom() {
   let randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
   // add # + the random value to have a hex value
-  let hexbValue = "#" + randomColor;
+  let hexValue = "#" + randomColor;
 
   // insert the generated hex value to the body
-  document.body.style.backgroundColor = hexbValue;
+  document.body.style.backgroundColor = hexValue;
 }
 
 // function to toggle night mode

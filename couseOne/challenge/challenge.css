@@ -15,18 +15,22 @@ section {
   align-items: center;
   justify-content: center;
   gap: 16px;
+  padding: 16px;
 }
 
 #imgSnail {
-  width: 800px;
-  height: 600px;
   border-radius: 8px;
   border: 1px solid black;
+  max-width: 100%;
+  display: block;
+  height: auto;
+  max-height: 600px;
 }
 
 #buttonContainer {
   display: flex;
-  width: 75%;
+  width: 100%;
+  max-width: 75%;
   justify-content: space-between;
 }
 
@@ -40,14 +44,29 @@ section {
   font-size: 32px;
 }
 
+#buttonContainer #nightModeBtn:hover {
+  background-color: gray;
+  transition: 0.5s;
+  border-radius: 8px;
+}
+
 #buttonContainer #randomBtn {
-  padding: 8px;
+  padding: 8px 16px;
   border-radius: 8px;
   border: 1px solid black;
+  font-size: 16px;
+}
+
+#buttonContainer #randomBtn:hover {
+  background-color: gray;
+  color: white;
+  transition: 0.5s;
+  border-radius: 8px;
 }
 
 #description {
-  width: 75%;
+  max-width: 75%;
+  width: 100%;
 }
 
 /* DARK MODE */
@@ -62,6 +81,32 @@ section {
   border: 1px solid white;
 }
 
-.darkmode #buttonContainer #randomBtn {
+.darkMode #buttonContainer #randomBtn {
   border: 1px solid white;
+}
+
+@media screen and (max-width: 1200px) {
+  #description {
+    max-width: 95%;
+  }
+
+  #buttonContainer {
+    max-width: 95%;
+  }
+}
+
+@media screen and (max-width: 875px) {
+  #description {
+    max-width: 100%;
+  }
+
+  #buttonContainer {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #buttonContainer #randomBtn {
+    padding: 0 8px;
+  }
 }
