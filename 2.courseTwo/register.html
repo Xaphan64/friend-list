@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="courseTwo.css" />
+    <title>Register Page</title>
+  </head>
+  <body>
+    <section>
+      <h2>Register into Calculator</h2>
+
+      <form class="registerForm" onsubmit="handleRegister(event)">
+        <div class="inputContainer">
+          <label for="html">Username:</label>
+          <input type="text" id="username" placeholder="Your username" />
+        </div>
+
+        <div class="inputContainer">
+          <label for="html">Email:</label>
+          <input type="email" id="email" placeholder="Your email" />
+        </div>
+
+        <div class="inputContainer">
+          <label for="html">Date of birth:</label>
+          <input type="date" id="birthDate" placeholder="password" />
+        </div>
+
+        <div class="inputContainer">
+          <label for="html">Password:</label>
+          <input type="password" id="password" placeholder="Your password" />
+        </div>
+
+        <button type="submit">Sign Up</button>
+
+        <p>Already have an account ? <a href="login.html">Login</a></p>
+      </form>
+    </section>
+
+    <script src="register.js"></script>
+  </body>
+</html>
