@@ -24,10 +24,10 @@
     <section>
       <h2>Login into Calculator</h2>
 
-      <form class="loginForm">
+      <form class="loginForm" onsubmit="handleLogin(event)">
         <div class="inputContainer">
-          <label for="html">Username:</label>
-          <input type="text" placeholder="Type your username" />
+          <label for="html">Email:</label>
+          <input type="text" placeholder="Type your email address" />
         </div>
 
         <div class="inputContainer">
@@ -37,8 +37,9 @@
 
         <button type="submit">Login</button>
         <p>No account ? You can register <a href="register.html">here</a></p>
+        <p id="loginError">Email or password incorrect!</p>
       </form>
     </section>
-    <script src="login.js"></script>
+    <script src="authentication.js"></script>
   </body>
 </html>

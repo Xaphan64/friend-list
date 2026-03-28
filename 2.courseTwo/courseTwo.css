@@ -22,8 +22,22 @@ form {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: relative;
 }
-
 a {
   color: lightcoral;
+}
+
+#fieldError,
+#ageError,
+#loginError {
+  color: red;
+  display: none;
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  translate: -50%;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
 }
