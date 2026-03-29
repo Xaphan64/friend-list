@@ -3,13 +3,16 @@ username = document.getElementById("username");
 email = document.getElementById("email");
 birthDate = document.getElementById("birthDate");
 password = document.getElementById("password");
+emailLogin = document.getElementById("emailLogin");
+passwordLogin = document.getElementById("passwordLogin");
 
 // get all the error messages
 fieldError = document.getElementById("fieldError");
 ageError = document.getElementById("ageError");
+loginEmptyError = document.getElementById("loginEmptyError");
 loginError = document.getElementById("loginError");
 
-let errorTimeout;
+// let errorTimeout;
 
 function handleRegister(e) {
   // prevent default when submitting
@@ -28,11 +31,13 @@ function handleRegister(e) {
   // lower than 14 condition
   registerAgeCondition = birthDate.value >= ageCheck;
 
-  // empty input error
-  handleError(registerEmptyCondition, fieldError);
-
-  // age error
-  handleError(registerAgeCondition, ageError);
+  // show empty fields error or underage error
+  handleError(
+    registerEmptyCondition,
+    fieldError,
+    registerAgeCondition,
+    ageError,
+  );
 
   // if inputs are not empty and age is above 14
   if (
@@ -70,18 +75,20 @@ function handleDate(year) {
 }
 
 function showError(element) {
-  clearTimeout(errorTimeout);
-  // default to none in case any error overlaps
-  fieldError.style.display = "none";
-  ageError.style.display = "none";
+  // clearTimeout(errorTimeout);
+  // hide all errors
+  document.querySelectorAll(".error").forEach((el) => {
+    el.style.display = "none";
+  });
 
   // make element error appear
   element.style.display = "block";
 
-  // make error dissapear after 30s
-  errorTimeout = setTimeout(() => {
+  // make error dissapear after 15s
+  // errorTimeout =
+  setTimeout(() => {
     element.style.display = "none";
-  }, 15000);
+  }, 5000);
 }
 
 // function handleError() {
@@ -104,18 +111,44 @@ function showError(element) {
 //   }
 // }
 
-function handleError(condition, error) {
+function handleError(condition, error, conditionTwo, errorTwo) {
   // if condition
   if (condition) {
     // throw  error
     showError(error);
     return;
+    // second condition
+  } else if (conditionTwo) {
+    // second error
+    showError(errorTwo);
   }
 }
 
 function handleLogin(e) {
+  // prevent default when submitting
   e.preventDefault();
 
-  //redirect to calculator page
-  // window.location.href = "calculator.html";
+  // get local storage data
+  storageEmail = localStorage.getItem("email");
+  storagePassword = localStorage.getItem("password");
+
+  // empty fields condition
+  loginEmptyCondition =
+    emailLogin.value.trim() === "" || passwordLogin.value.trim() === "";
+
+  // wrong email or pass condition
+  loginCondition =
+    emailLogin.value !== storageEmail ||
+    passwordLogin.value !== storagePassword;
+
+  //show empty field error or wrong credentials error
+  handleError(loginEmptyCondition, loginEmptyError, loginCondition, loginError);
+
+  if (
+    emailLogin.value === storageEmail &&
+    passwordLogin.value === storagePassword
+  ) {
+    //redirect to calculator page
+    window.location.href = "calculator.html";
+  }
 }

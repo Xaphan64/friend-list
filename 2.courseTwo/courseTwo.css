@@ -30,7 +30,8 @@ a {
 
 #fieldError,
 #ageError,
-#loginError {
+#loginError,
+#loginEmptyError {
   color: red;
   display: none;
   position: absolute;
