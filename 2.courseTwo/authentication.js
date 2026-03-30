@@ -1,16 +1,16 @@
 // get all of the inputs
-username = document.getElementById("username");
-email = document.getElementById("email");
-birthDate = document.getElementById("birthDate");
-password = document.getElementById("password");
-emailLogin = document.getElementById("emailLogin");
-passwordLogin = document.getElementById("passwordLogin");
+const username = document.getElementById("username");
+const email = document.getElementById("email");
+const birthDate = document.getElementById("birthDate");
+const password = document.getElementById("password");
+const emailLogin = document.getElementById("emailLogin");
+const passwordLogin = document.getElementById("passwordLogin");
 
 // get all the error messages
-fieldError = document.getElementById("fieldError");
-ageError = document.getElementById("ageError");
-loginEmptyError = document.getElementById("loginEmptyError");
-loginError = document.getElementById("loginError");
+const fieldError = document.getElementById("fieldError");
+const ageError = document.getElementById("ageError");
+const loginEmptyError = document.getElementById("loginEmptyError");
+const loginError = document.getElementById("loginError");
 
 // let errorTimeout;
 
