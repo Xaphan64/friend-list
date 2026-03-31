@@ -48,6 +48,10 @@ function clearAll() {
   B = null;
 }
 
+function handleLogout() {
+  window.location.href = "login.html";
+}
+
 // loop through the buttonValues
 for (let i = 0; i < buttonValues.length; i++) {
   // get each element in the buttonValues array
@@ -72,11 +76,30 @@ for (let i = 0; i < buttonValues.length; i++) {
     button.style.color = "#1c1c1c";
   }
 
-  // https://www.youtube.com/watch?v=KM8PIiqq97c
-
   // button clicks
   button.addEventListener("click", function () {
     if (rightSymbols.includes(value)) {
+      if (value == "=") {
+        if (A != null) {
+          B = display.value;
+          let numA = Number(A);
+          let numB = Number(B);
+
+          if (operator == "÷") {
+            display.value = numA / numB;
+          } else if (operator == "x") {
+            display.value = numA * numB;
+          } else if (operator == "-") {
+            display.value = numA - numB;
+          } else if ((operator = "+")) {
+            display.value = numA + numB;
+          }
+        }
+      } else {
+        operator = value;
+        A = display.value;
+        display.value = "";
+      }
     } else if (topSymbols.includes(value)) {
       if (value == "AC") {
         clearAll();

@@ -7,25 +7,38 @@
     <title>Calculator</title>
   </head>
   <body>
-    <section>
-      <h1>Calculator</h1>
+    <main>
+      <header>
+        <h1>Calculator</h1>
 
-      <div id="description">
-        Hello,
-        <p id="userName">NAME</p>
-        you are
-        <p id="userAge">X</p>
-        years old.
-      </div>
+        <div id="headerContainer">
+          <div id="description">
+            Hello,
+            <p id="userName">NAME</p>
+            you are
+            <p id="userAge">X</p>
+            years old.
+          </div>
 
-      <div id="calculatorContainer">
-        <div id="calculator">
-          <input type="text" id="display" readonly />
-
-          <div id="buttons"></div>
+          <button type="button" onclick="handleLogout()">Logout</button>
         </div>
-      </div>
-    </section>
+      </header>
+
+      <section>
+        <div id="calculatorContainer">
+          <div id="calculator">
+            <input type="text" id="display" readonly value="0" />
+
+            <div id="buttons"></div>
+          </div>
+        </div>
+
+        <footer>
+          © Copyright by Alexandru-Daniel Sarbu. Don't claim as your own!
+        </footer>
+      </section>
+    </main>
+
     <script src="calculator.js"></script>
   </body>
 </html>

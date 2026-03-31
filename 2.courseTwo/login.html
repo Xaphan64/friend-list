@@ -21,34 +21,37 @@
     <title>Course Two</title>
   </head>
   <body>
-    <section>
-      <h2>Login into Calculator</h2>
+    <main>
+      <section>
+        <h2>Login into Calculator</h2>
 
-      <form class="loginForm" onsubmit="handleLogin(event)">
-        <div class="inputContainer">
-          <label for="html">Email:</label>
-          <input
-            type="text"
-            id="emailLogin"
-            placeholder="Type your email address"
-          />
-        </div>
+        <form class="loginForm" onsubmit="handleLogin(event)">
+          <div class="inputContainer">
+            <label for="html">Email:</label>
+            <input
+              type="text"
+              id="emailLogin"
+              placeholder="Type your email address"
+            />
+          </div>
 
-        <div class="inputContainer">
-          <label for="html">Password:</label>
-          <input
-            type="password"
-            id="passwordLogin"
-            placeholder="Type you password"
-          />
-        </div>
+          <div class="inputContainer">
+            <label for="html">Password:</label>
+            <input
+              type="password"
+              id="passwordLogin"
+              placeholder="Type you password"
+            />
+          </div>
 
-        <button type="submit">Login</button>
-        <p>No account ? You can register <a href="register.html">here</a></p>
-        <p id="loginEmptyError" class="error">Complete both fields</p>
-        <p id="loginError" class="error">Email or password incorrect!</p>
-      </form>
-    </section>
+          <button type="submit">Login</button>
+          <p>No account ? You can register <a href="register.html">here</a></p>
+          <p id="loginEmptyError" class="error">Complete both fields</p>
+          <p id="loginError" class="error">Email or password incorrect!</p>
+        </form>
+      </section>
+    </main>
+
     <script src="authentication.js"></script>
   </body>
 </html>
