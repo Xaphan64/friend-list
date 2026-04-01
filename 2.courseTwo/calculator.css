@@ -67,7 +67,7 @@ section {
 }
 
 #headerContainer button:hover {
-  opacity: 70%;
+  opacity: 90%;
 }
 
 #description {
@@ -139,4 +139,9 @@ section {
 
 #buttons button:active {
   opacity: 90%;
+}
+
+footer {
+  position: absolute;
+  bottom: 16px;
 }

@@ -13,6 +13,7 @@ const loginEmptyError = document.getElementById("loginEmptyError");
 const loginError = document.getElementById("loginError");
 
 // let errorTimeout;
+let isLoggedIn = false;
 
 function handleRegister(e) {
   // prevent default when submitting
@@ -78,16 +79,16 @@ function showError(element) {
   // clearTimeout(errorTimeout);
   // hide all errors
   document.querySelectorAll(".error").forEach((el) => {
-    el.style.display = "none";
+    el.style.visibility = "hidden";
   });
 
   // make element error appear
-  element.style.display = "block";
+  element.style.visibility = "visible";
 
   // make error dissapear after 15s
   // errorTimeout =
   setTimeout(() => {
-    element.style.display = "none";
+    element.style.visibility = "hidden";
   }, 5000);
 }
 

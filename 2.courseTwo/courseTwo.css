@@ -22,7 +22,7 @@ body::before {
 }
 
 main {
-  width: 700px;
+  width: 600px;
   /* background-color: black; */
   background: rgba(0, 0, 0, 0.6);
 }
@@ -37,12 +37,6 @@ section {
   gap: 16px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  position: relative;
-}
 a {
   color: lightcoral;
 }
@@ -52,12 +46,83 @@ a {
 #loginError,
 #loginEmptyError {
   color: red;
-  display: none;
   position: absolute;
+  visibility: hidden;
   bottom: -32px;
   left: 50%;
   translate: -50%;
   width: 100%;
   text-align: center;
   white-space: nowrap;
+  font-size: 18px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  padding: 16px;
+  width: 400px;
+
+  /* background-color: red; */
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  /* background-color: green; */
+}
+
+form div label {
+  font-size: 24px;
+}
+
+form div input {
+  background-color: #1c1c1c;
+  color: white;
+  border: 2px solid lightgray;
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 18px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(50%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%)
+    contrast(90%);
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-datetime-edit {
+  color: gray;
+}
+
+form button {
+  margin-top: 8px;
+  padding: 12px 8px;
+  cursor: pointer;
+  background-color: #ff9500;
+  transition: 0.5s;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+form button:hover {
+  opacity: 90%;
+}
+
+form span {
+  font-size: 20px;
+  padding-top: 8px;
+}
+
+footer {
+  position: absolute;
+  bottom: 16px;
 }

@@ -49,6 +49,7 @@ function clearAll() {
 }
 
 function handleLogout() {
+  // redirect to login page
   window.location.href = "login.html";
 }
 

@@ -23,7 +23,7 @@
   <body>
     <main>
       <section>
-        <h2>Login into Calculator</h2>
+        <h1>Login into Calculator</h1>
 
         <form class="loginForm" onsubmit="handleLogin(event)">
           <div class="inputContainer">
@@ -45,10 +45,17 @@
           </div>
 
           <button type="submit">Login</button>
-          <p>No account ? You can register <a href="register.html">here</a></p>
+          <span
+            >No account ? You can register
+            <a href="register.html">here</a></span
+          >
           <p id="loginEmptyError" class="error">Complete both fields</p>
           <p id="loginError" class="error">Email or password incorrect!</p>
         </form>
+
+        <footer>
+          © Copyright by Alexandru-Daniel Sarbu. Don't claim as your own!
+        </footer>
       </section>
     </main>
 
