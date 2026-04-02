@@ -16,6 +16,14 @@ fetch("movies.json")
     // get the html document
     const moviesContainer = document.getElementById("moviesContainer");
 
+    // toUpperCase 1st letter
+    function capitalize(string) {
+      return string
+        .split(" ")
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(" ");
+    }
+
     // display data here
     let html = "";
     data.movies.forEach((movie) => {
@@ -23,11 +31,14 @@ fetch("movies.json")
     <div id="movie">
       <img src="https://placehold.co/90x90" alt="${movie.title}" />
       <div id="movieText">
-        <h2 id="movieTitle">${movie.title}</h2>
+        <span id="movieTitle">${movie.title} <p id="movieYear">${`(${movie.year})`}</p></span>
         <div id="movieDetails">
-          <p id="movieYear">${movie.year}</p>
-          <p id="movieGenre">${movie.genre}</p>
+          
+        <div id="ratingContainer">
+          <img src="imdb.png" alt="IMDB" id="imdbIcon" />
           <p id="rating">${movie.rating}⭐</p>
+        </div>
+          <p id="movieGenre">${capitalize(movie.genre)}</p>
         </div>
       </div>
       <div id="buttonContainer">
