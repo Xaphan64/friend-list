@@ -1,0 +1,54 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#moviesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#movie {
+  background-color: darkred;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+}
+
+#movieText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+#movieDetails {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: absolute;
+  right: 16px;
+}

@@ -23,7 +23,6 @@ body::before {
 
 main {
   width: 600px;
-  /* background-color: black; */
   background: rgba(0, 0, 0, 0.6);
 }
 
@@ -64,16 +63,12 @@ form {
   position: relative;
   padding: 16px;
   width: 400px;
-
-  /* background-color: red; */
 }
 
 form div {
   display: flex;
   flex-direction: column;
   gap: 8px;
-
-  /* background-color: green; */
 }
 
 form div label {
@@ -114,7 +109,7 @@ form button {
 }
 
 form button:hover {
-  opacity: 90%;
+  opacity: 70%;
 }
 
 form span {
