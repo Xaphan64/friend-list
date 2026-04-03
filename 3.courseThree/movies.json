@@ -1,0 +1,95 @@
+{
+  "movies": [
+    {
+      "id": 9,
+      "title": "Taxi Driver",
+      "image": "https://placehold.co/90x90",
+      "genre": "neo-noir psychological drama",
+      "year": 1976,
+      "rating": 8.2,
+      "watched": false
+    },
+    {
+      "id": 2,
+      "title": "The Godfather",
+      "image": "https://placehold.co/90x90",
+      "genre": "gangster",
+      "year": 1972,
+      "rating": 9.2,
+      "watched": false
+    },
+    {
+      "id": 4,
+      "title": "The Lord of the Rings: The Return of the King",
+      "image": "https://placehold.co/90x90",
+      "genre": "fantasy",
+      "year": 2003,
+      "rating": 8.9,
+      "watched": false
+    },
+
+    {
+      "id": 6,
+      "title": "Terminator 2: Judgment Day",
+      "image": "https://placehold.co/90x90",
+      "genre": "science-fiction action",
+      "year": 1991,
+      "rating": 8.5,
+      "watched": false
+    },
+    {
+      "id": 7,
+      "title": "Memento",
+      "image": "https://placehold.co/90x90",
+      "genre": "psychological thriller neo-noir",
+      "year": 2000,
+      "rating": 8.4,
+      "watched": false
+    },
+    {
+      "id": 8,
+      "title": "Reservior Dogs",
+      "image": "https://placehold.co/90x90",
+      "genre": "independent heist",
+      "year": 1992,
+      "rating": 8.3,
+      "watched": false
+    },
+    {
+      "id": 3,
+      "title": "The Dark Knight",
+      "image": "https://placehold.co/90x90",
+      "genre": "superhero",
+      "year": 2008,
+      "rating": 9.0,
+      "watched": false
+    },
+    {
+      "id": 5,
+      "title": "Schindler's List",
+      "image": "https://placehold.co/90x90",
+      "genre": "historical drama",
+      "year": 1993,
+      "rating": 9.0,
+      "watched": false
+    },
+    {
+      "id": 10,
+      "title": "Night of the Living Dead",
+      "image": "https://placehold.co/90x90",
+      "genre": "independent zombie horror",
+      "year": 1968,
+      "rating": 7.9,
+      "watched": false
+    },
+    {
+      "id": 1,
+      "title": "The Shawshank Redemption",
+      "image": "https://placehold.co/90x90",
+      "genre": "drama",
+      "year": 1994,
+      "rating": 9.3,
+      "watched": true
+    }
+  ]
+}

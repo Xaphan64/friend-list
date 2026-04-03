@@ -25,11 +25,34 @@ then, catch, finally -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="courseThree.css" />
-    <title>Popcord Tracker</title>
+    <title>Popcorn Tracker</title>
   </head>
   <body>
     <section>
       <h1>Popcorn Tracker</h1>
+
+      <div id="sortButtonContainer">
+        <p>Sort by:</p>
+        <button
+          type="button"
+          id="ascendingButton"
+          onclick="handleAlphabetically()"
+        >
+          Alphabetical
+        </button>
+
+        <button type="button" id="ratingButton" onclick="handleRating()">
+          Rating
+        </button>
+
+        <button type="button" id="genreButton" onclick="handleGenre()">
+          Genre
+        </button>
+
+        <button type="button" id="genreButton" onclick="handleWatchlist()">
+          Watchlist
+        </button>
+      </div>
 
       <div id="moviesContainer"></div>
     </section>
