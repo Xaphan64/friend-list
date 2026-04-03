@@ -1,0 +1,52 @@
+{
+  "friends": [
+    {
+      "id": 1,
+      "name": "Xaphan64",
+      "icon": "https://i.pravatar.cc/48",
+      "status": "online",
+      "nickname": "",
+      "birthDate": "1994-05-06"
+    },
+    {
+      "id": 2,
+      "name": "ShadowStrikeX",
+      "icon": "https://i.pravatar.cc/48",
+      "status": "offline",
+      "nickname": "",
+      "birthDate": "2000-04-03"
+    },
+    {
+      "id": 3,
+      "name": "NovaKnight35",
+      "icon": "https://i.pravatar.cc/48",
+      "status": "away",
+      "nickname": "",
+      "birthDate": "1990-08-30"
+    },
+    {
+      "id": 3,
+      "name": "Quest Master'05",
+      "icon": "https://i.pravatar.cc/48",
+      "status": "online",
+      "nickname": "",
+      "birthDate": "2005-12-24"
+    },
+    {
+      "id": 4,
+      "name": "BlackDevil666",
+      "icon": "https://i.pravatar.cc/48",
+      "status": "offline",
+      "nickname": "",
+      "birthDate": "1989-01-13"
+    },
+    {
+      "id": 5,
+      "name": "Neon Ninja7",
+      "icon": "https://i.pravatar.cc/48",
+      "status": "offline",
+      "nickname": "",
+      "birthDate": "2001-04-03"
+    }
+  ]
+}
