@@ -9,6 +9,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
 }
 
 .friendsContainer {
@@ -17,7 +18,7 @@ section {
   gap: 8px;
 }
 
-.friend {
+.friendCard {
   display: flex;
   gap: 16px;
   align-items: center;
@@ -31,7 +32,7 @@ section {
   height: 90px;
 }
 
-.friend .imageContainer img {
+.friendCard .imageContainer img {
   border-radius: 50%;
 }
 
@@ -46,7 +47,7 @@ section {
   right: 5px;
 }
 
-.friend:hover .moreOptions {
+.friendCard:hover .moreOptions {
   /* visibility: visible; */
   display: block;
 }
@@ -69,4 +70,14 @@ section {
 .moreOptions:hover {
   background-color: gray;
   transition: 0.5s;
+}
+
+.filterButtonContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.sortButtonContainer {
+  display: flex;
+  gap: 8px;
 }

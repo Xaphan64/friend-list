@@ -13,14 +13,15 @@ name (you can add a timer before the retry is allowed)
     • Think of other methods that you find useful -->
 
 <!-- de facut un friends list, data din json server, friend = id, name, icon, status,
-nickname (optional) 
-filtru cu friends care sunt online/offline 
-sort alphabetically, by birthdate, online/offline ? 
-de facut add friend - iar la birthdate sa fie ceva random 
+nickname (optional) - DONE
+filtru cu friends care sunt online/offline - DONE 
+sort alphabetically, by birthdate? 
+searchbar and search function
+de facut add friend - brirthday and status sa fie random cand adaugi un prieten 
 de facut 3 puncte cu remove friend, set nickname 
 block friends si dupa o lista separata cu prieteni blocati 
-de pus random background pe styling 
-daca online bulina verde, daca offline, gry, daca away, galbena ?
+de pus random background pe styling la icons ?
+daca online bulina verde, daca offline, gry, daca away, galbena - DONE
 de bagat si chat option ? when clicked add modal with messages -->
 
 <!doctype html>
@@ -33,6 +34,20 @@ de bagat si chat option ? when clicked add modal with messages -->
 
     <section>
       <h1>Friends List</h1>
+
+      <div class="filterButtonContainer">
+        <button type="button" class="allFriends" onclick="handleRender(allFriends)">All ✓</button>
+
+        <button type="button" class="onlineFriends" onclick="handleFilterOnline()">Online</button>
+      </div>
+
+      <div class="sortButtonContainer">
+        <p>Sort:</p>
+
+        <button type="button" class="alphabetically" onclick="handleFilterAlpha()">Name</button>
+
+        <button type="button" class="age" onclick="handleFilterAge()">Age</button>
+      </div>
 
       <div class="friendsContainer"></div>
     </section>
