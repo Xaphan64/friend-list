@@ -20,6 +20,7 @@ let allFriends = [];
 // define value for sorting
 let isAlpha;
 let isAge;
+let isOnline = false;
 
 function handleRender(friends) {
   // create an empty friend list
@@ -61,10 +62,6 @@ function handleRender(friends) {
 
   // insert the friendlist into the html friendsContainer
   friendsContainer.innerHTML = friendList;
-
-  // change button contents
-  onlineBtn.textContent = "Online ";
-  allBtn.textContent = "All ✓";
 }
 
 // handle the dot color based on the status
@@ -87,6 +84,21 @@ function handleCapitalize(text) {
     .join(" ");
 }
 
+function handleAllFriends() {
+  // render all friends
+  handleRender(allFriends);
+
+  // change isOnlien status
+  isOnline = false;
+
+  // DE VAZUT DACA MERGE REFACTOR PE BUTOANE IN FUNCTIE DE isOnline status
+  // change button contents
+  onlineBtn.textContent = "Online";
+  allBtn.textContent = "All ✓";
+  alphaBtn.textContent = "Name";
+  ageBtn.textContent = "Age";
+}
+
 function handleFilterOnline() {
   // online friends filter
   const onlineFriends = allFriends.filter((friend) => friend.status !== "offline");
@@ -94,25 +106,38 @@ function handleFilterOnline() {
   // render only online friends
   handleRender(onlineFriends);
 
+  // change isOnlien status
+  isOnline = true;
+
   // change button contents
   onlineBtn.textContent = "Online ✓";
   allBtn.textContent = "All";
+  alphaBtn.textContent = "Name";
+  ageBtn.textContent = "Age";
 }
 
 function handleFilterAlpha() {
   // toggle alpha on/off
   isAlpha = !isAlpha;
 
+  // online friends filter
+  const onlineFriends = allFriends.filter((friend) => friend.status !== "offline");
+
   // sort friends.name a-z or z-a
   const sortedByAlpha = allFriends.sort((a, b) =>
     isAlpha ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name),
   );
 
+  const sortedByAlphaOnline = onlineFriends.sort((a, b) =>
+    isAlpha ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name),
+  );
+
   // change button content
   alphaBtn.textContent = isAlpha ? "Name A-Z" : "Name Z-A";
+  ageBtn.textContent = "Age";
 
   // render sorted alphabetically
-  handleRender(sortedByAlpha);
+  handleRender(isOnline ? sortedByAlphaOnline : sortedByAlpha);
 }
 
 function handleFilterAge() {
@@ -126,6 +151,7 @@ function handleFilterAge() {
 
   // change button content
   ageBtn.textContent = isAge ? "Age ↑" : "Age ↓";
+  alphaBtn.textContent = "Name";
 
   // render sorted alphabetically
   handleRender(sortedByAge);
