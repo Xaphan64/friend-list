@@ -8,11 +8,16 @@ async function loadData() {
   handleRender(allFriends);
 }
 
-// get all buttons
+// get elements
 const allBtn = document.querySelector(".allFriends");
 const onlineBtn = document.querySelector(".onlineFriends");
 const alphaBtn = document.querySelector(".alphabetically");
 const ageBtn = document.querySelector(".age");
+const clearBtn = document.querySelector(".clearButton");
+const searchInput = document.querySelector(".searchInput");
+const filterContainer = document.querySelector(".filterButtonContainer");
+const sortContainer = document.querySelector(".sortButtonContainer");
+const emptyText = document.querySelector(".emptyText");
 
 // create an empty array with friends
 let allFriends = [];
@@ -50,7 +55,7 @@ function handleRender(friends) {
         </div>
         
         <button type="button" class="moreOptions" onclick="handleFriendMenu()">
-          &#8801
+          <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
       </div>
       
@@ -85,10 +90,7 @@ function handleCapitalize(text) {
 }
 
 function handleAllFriends() {
-  // render all friends
-  handleRender(allFriends);
-
-  // change isOnlien status
+  // change isOnline status
   isOnline = false;
 
   // DE VAZUT DACA MERGE REFACTOR PE BUTOANE IN FUNCTIE DE isOnline status
@@ -97,6 +99,9 @@ function handleAllFriends() {
   allBtn.textContent = "All ✓";
   alphaBtn.textContent = "Name";
   ageBtn.textContent = "Age";
+
+  // render all friends
+  handleRender(allFriends);
 }
 
 function handleFilterOnline() {
@@ -106,7 +111,7 @@ function handleFilterOnline() {
   // render only online friends
   handleRender(onlineFriends);
 
-  // change isOnlien status
+  // change isOnline status
   isOnline = true;
 
   // change button contents
@@ -144,8 +149,15 @@ function handleFilterAge() {
   // toggle alpha on/off
   isAge = !isAge;
 
+  // online friends filter
+  const onlineFriends = allFriends.filter((friend) => friend.status !== "offline");
+
   // sort by age ↑ or ↓
   const sortedByAge = [...allFriends].sort((a, b) =>
+    isAge ? new Date(a.birthDate) - new Date(b.birthDate) : new Date(b.birthDate) - new Date(a.birthDate),
+  );
+
+  const sortedByAgeOnline = [...onlineFriends].sort((a, b) =>
     isAge ? new Date(a.birthDate) - new Date(b.birthDate) : new Date(b.birthDate) - new Date(a.birthDate),
   );
 
@@ -154,7 +166,90 @@ function handleFilterAge() {
   alphaBtn.textContent = "Name";
 
   // render sorted alphabetically
-  handleRender(sortedByAge);
+  handleRender(isOnline ? sortedByAgeOnline : sortedByAge);
+}
+
+function handleSearchFriend() {
+  // get the value
+  let input = searchInput.value;
+  // convert anything written to lower
+  input = input.toLowerCase();
+
+  // get all friends and filter by name or nickname with the value in the input
+  const filteredFriends = allFriends.filter(
+    (friend) => friend.name.toLowerCase().includes(input) || friend.nickname.toLowerCase().includes(input),
+  );
+
+  // if input is not empty, make other filters disappear and make clear button appear
+  if (input !== "") {
+    filterContainer.style.display = "none";
+    sortContainer.style.display = "none";
+    clearBtn.style.visibility = "visible";
+    // else make buttons appear and clear disappear
+  } else {
+    filterContainer.style.display = "flex";
+    sortContainer.style.display = "flex";
+    clearBtn.style.visibility = "hidden";
+  }
+
+  // change button contents
+  onlineBtn.textContent = "Online";
+  allBtn.textContent = "All ✓";
+  alphaBtn.textContent = "Name";
+  ageBtn.textContent = "Age";
+
+  // reset filter status
+  isOnline = false;
+
+  // render by input field
+  handleRender(filteredFriends);
+
+  // show text if friends is empty
+  handleEmptyText();
+}
+
+function handleClearInput() {
+  // if input not empty set it to empty and reset other buttons
+  if (searchInput.value !== "") {
+    searchInput.value = "";
+    filterContainer.style.display = "flex";
+    sortContainer.style.display = "flex";
+    clearBtn.style.visibility = "hidden";
+  }
+
+  // change button contents
+  onlineBtn.textContent = "Online";
+  allBtn.textContent = "All ✓";
+  alphaBtn.textContent = "Name";
+  ageBtn.textContent = "Age";
+
+  // reset filter status
+  isOnline = false;
+
+  // render all friends back
+  handleRender(allFriends);
+
+  // show text if friends is empty
+  handleEmptyText();
+}
+
+function handleEmptyText() {
+  // get the value
+  let input = searchInput.value;
+  // convert anything written to lower
+  input = input.toLowerCase();
+
+  // get all friends and filter by name or nickname with the value in the input
+  const filteredFriends = allFriends.filter(
+    (friend) => friend.name.toLowerCase().includes(input) || friend.nickname.toLowerCase().includes(input),
+  );
+
+  // if there is no friend with that name show message
+  if (filteredFriends.length === 0) {
+    emptyText.style.display = "block";
+  } else {
+    emptyText.style.display = "none";
+  }
 }
 
 function handleFriendMenu() {

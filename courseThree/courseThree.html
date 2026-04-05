@@ -15,7 +15,7 @@ name (you can add a timer before the retry is allowed)
 <!-- de facut un friends list, data din json server, friend = id, name, icon, status,
 nickname (optional) - DONE
 filtru cu friends care sunt online/offline - DONE 
-sort alphabetically, by birthdate? 
+sort alphabetically, by birthdate - DONE
 searchbar and search function
 de facut add friend - brirthday and status sa fie random cand adaugi un prieten 
 de facut 3 puncte cu remove friend, set nickname 
@@ -30,10 +30,29 @@ de bagat si chat option ? when clicked add modal with messages -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="courseThree.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <title>Friends List</title>
 
     <section>
       <h1>Friends List</h1>
+
+      <form class="searchForm">
+        <!-- de bagat search icon in input ?  -->
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          name="search"
+          class="searchInput"
+          placeholder="Seach for a friend..."
+          onkeyup="handleSearchFriend()"
+        />
+
+        <!-- de facut butonul X cand e empty sa nu apara, cand e scris sa apara si sa stearga tot textul -->
+        <!-- de bagat X-ul in interiorul inputului -->
+        <button type="button" class="clearButton" onclick="handleClearInput()">
+          <i class="fa-solid fa-x"></i>
+        </button>
+      </form>
 
       <div class="filterButtonContainer">
         <button type="button" class="allFriends" onclick="handleAllFriends()">All ✓</button>
@@ -50,6 +69,8 @@ de bagat si chat option ? when clicked add modal with messages -->
       </div>
 
       <div class="friendsContainer"></div>
+
+      <div class="emptyText">There are no results for you request.</div>
     </section>
 
     <script src="courseThree.js"></script>

@@ -81,3 +81,11 @@ section {
   display: flex;
   gap: 8px;
 }
+
+.clearButton {
+  visibility: hidden;
+}
+
+.emptyText {
+  display: none;
+}
