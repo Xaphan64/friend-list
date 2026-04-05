@@ -252,6 +252,35 @@ function handleEmptyText() {
   }
 }
 
+function handleAddFriend() {
+  // get statuses
+  const status = ["offline", "online", "away", "busy"];
+  const random = Math.floor(Math.random() * status.length);
+
+  // create a new friend object
+  const newFriend = {
+    id: Date.now(),
+    name: "Daniel",
+    icon: `https://api.dicebear.com/9.x/avataaars/svg?seed=${Date.now()}`,
+    status: `${status[random]}`,
+    nickname: "",
+    birthDate: handleRandomDate(new Date(1960, 1, 1), new Date(2019, 1, 1))
+      .toISOString()
+      .slice(0, 10),
+  };
+
+  allFriends.push(newFriend);
+
+  handleRender(allFriends);
+
+  console.log(newFriend);
+}
+
+// generate a random date between 2 parameters
+function handleRandomDate(from, to) {
+  return new Date(from.getTime() + Math.random() * (to.getTime() - from.getTime()));
+}
+
 function handleFriendMenu() {
   console.log("friend menu clicked");
 }
