@@ -1,0 +1,93 @@
+{
+  "friends": [
+    {
+      "id": "1",
+      "name": "Xaphan64",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
+      "status": "online",
+      "nickname": "test",
+      "birthDate": "1994-05-06"
+    },
+    {
+      "id": "2",
+      "name": "ShadowStrikeX",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
+      "status": "offline",
+      "nickname": "",
+      "birthDate": "2000-04-03"
+    },
+    {
+      "id": "3",
+      "name": "NovaKnight35",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
+      "status": "away",
+      "nickname": "",
+      "birthDate": "1990-08-30"
+    },
+    {
+      "id": "4",
+      "name": "Quest Master'05",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
+      "status": "busy",
+      "nickname": "",
+      "birthDate": "2005-12-24"
+    },
+    {
+      "id": "5",
+      "name": "BlackDevil666",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
+      "status": "offline",
+      "nickname": "",
+      "birthDate": "1989-01-13"
+    },
+    {
+      "id": "6",
+      "name": "Neon Ninja7",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
+      "status": "offline",
+      "nickname": "",
+      "birthDate": "2002-08-11"
+    },
+    {
+      "id": "7",
+      "name": "DarkRanger7",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
+      "status": "online",
+      "nickname": "",
+      "birthDate": "2001-04-03"
+    },
+    {
+      "id": "8",
+      "name": "LeroyJenkins",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
+      "status": "online",
+      "nickname": "",
+      "birthDate": "1995-03-08"
+    },
+    {
+      "id": "u26EhdxQ_Js",
+      "name": "daniel",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1775484349774",
+      "nickname": ""
+    },
+    {
+      "id": "w_bwBEtvOQ8",
+      "name": "daniel",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1775484353698",
+      "nickname": ""
+    },
+    {
+      "id": "vhfYYtmjxwo",
+      "name": "test",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1775484439495",
+      "nickname": ""
+    },
+    {
+      "id": "WamxZCbMw0o",
+      "name": "test2223123",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1775484443623",
+      "nickname": ""
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

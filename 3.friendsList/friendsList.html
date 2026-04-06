@@ -17,8 +17,10 @@ filtru cu friends care sunt online/offline - DONE
 sort alphabetically, by birthdate - DONE
 searchbar and search function - DONE
 de facut add friend - brirthday and status sa fie random cand adaugi un prieten 
+de facut all friends sa fie by default aranjat alfabetic ?
 de facut 3 puncte cu remove friend, set nickname 
 block friends si dupa o lista separata cu prieteni blocati 
+de schimbat mesajul de eroare cand nu isi face fetch sa scrie 404 or something 
 de pus random background pe styling la icons ?
 daca online bulina verde, daca offline, gry, daca away, galbena - DONE
 de bagat si chat option ? when clicked add modal with messages -->
@@ -28,53 +30,26 @@ de bagat si chat option ? when clicked add modal with messages -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="courseThree.css" />
+    <link rel="stylesheet" type="text/css" href="friendsList.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <title>Friends List</title>
-
-    <section>
+  </head>
+  <body>
+    <section class="friendAppContainer">
       <h1>Friends List</h1>
 
-      <button type="button" onclick="handleAddFriend()">Add friend</button>
-
-      <form class="searchForm">
-        <!-- de bagat search icon in input ?  -->
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input
-          type="text"
-          name="search"
-          class="searchInput"
-          placeholder="Seach for a friend..."
-          onkeyup="handleSearchFriend()"
-        />
-
-        <!-- de facut butonul X cand e empty sa nu apara, cand e scris sa apara si sa stearga tot textul -->
-        <!-- de bagat X-ul in interiorul inputului -->
-        <button type="button" class="clearButton" onclick="handleClearInput()">
-          <i class="fa-solid fa-x"></i>
-        </button>
-      </form>
-
-      <div class="filterButtonContainer">
-        <button type="button" class="allFriends" onclick="handleAllFriends()">All ✓</button>
-
-        <button type="button" class="onlineFriends" onclick="handleFilterOnline()">Online</button>
-      </div>
-
-      <div class="sortButtonContainer">
-        <p>Sort:</p>
-
-        <button type="button" class="alphabetically" onclick="handleFilterAlpha()">Name</button>
-
-        <button type="button" class="age" onclick="handleFilterAge()">Age</button>
-      </div>
-
+      <button type="button" onclick="handleAddFriend(event)">test</button
+      ><input
+        type="text"
+        placeholder="Type Friend name that you want to add..."
+        name="friendName"
+        class="friendName"
+      />
       <div class="friendsContainer"></div>
-
-      <div class="emptyText">There are no results for you request.</div>
     </section>
 
-    <script src="courseThree.js"></script>
-  </head>
-  <body></body>
+    <!-- de facut styling la eroare -->
+    <div class="errorContainer"></div>
+    <script src="friendsList.js"></script>
+  </body>
 </html>

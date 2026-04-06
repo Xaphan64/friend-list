@@ -1,11 +1,28 @@
-async function loadData() {
-  // fetch from the JSON
-  let response = await fetch("friends.json");
-  let data = await response.json();
-  allFriends = data.friends;
+// go to folder where json is located with terminal and then npx json-server friends.json
+// (add --port 30XX if its not working) and CTRL + C to stop
 
-  // render the all friends
-  handleRender(allFriends);
+const url = "http://localhost:3000/friends";
+
+async function loadData() {
+  try {
+    // fetch from the JSON
+    let response = await fetch(url);
+
+    // if response not ok throw error
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    let data = await response.json();
+    allFriends = data;
+
+    // render the all friends
+    handleRender(allFriends);
+  } catch (error) {
+    // show error
+    console.log(error);
+    handleError(error.message);
+  }
 }
 
 // get elements
@@ -18,6 +35,8 @@ const searchInput = document.querySelector(".searchInput");
 const filterContainer = document.querySelector(".filterButtonContainer");
 const sortContainer = document.querySelector(".sortButtonContainer");
 const emptyText = document.querySelector(".emptyText");
+const menuModal = document.querySelector(".menuModal");
+const addFriendInput = document.querySelector(".friendName");
 
 // create an empty array with friends
 let allFriends = [];
@@ -87,6 +106,20 @@ function handleCapitalize(text) {
     .split(" ")
     .map((word) => word[0].toUpperCase() + word.slice(1))
     .join(" ");
+}
+
+function handleError(error) {
+  // get the html element
+  const fetchErrorContainer = document.querySelector(".fetchError");
+
+  if (error) {
+    fetchErrorContainer.innerHTML = `
+    <div style="color: red; font-weight: bold;">
+      ❌ ${error}
+    </div>
+  `;
+    document.querySelector(".friendListSection").style.display = "none";
+  }
 }
 
 function handleAllFriends() {
@@ -252,33 +285,67 @@ function handleEmptyText() {
   }
 }
 
-function handleAddFriend() {
+function handleAddFriend(e) {
+  e.preventDefault();
+
   // get statuses
-  const status = ["offline", "online", "away", "busy"];
-  const random = Math.floor(Math.random() * status.length);
+  const status = ["online", "online", "online", "online", "away", "away", "busy", "offline"];
 
   // create a new friend object
   const newFriend = {
     id: Date.now(),
-    name: "Daniel",
+    name: "daniel",
     icon: `https://api.dicebear.com/9.x/avataaars/svg?seed=${Date.now()}`,
-    status: `${status[random]}`,
+    status: handleRandomStatus(status),
     nickname: "",
     birthDate: handleRandomDate(new Date(1960, 1, 1), new Date(2019, 1, 1))
       .toISOString()
       .slice(0, 10),
   };
 
-  allFriends.push(newFriend);
-
-  handleRender(allFriends);
-
-  console.log(newFriend);
+  // post friend into json server
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newFriend),
+  })
+    .then((response) => response.json())
+    .then((friend) => {
+      console.log(friend);
+      // render the new list
+      allFriends.push(friend);
+      handleRender(allFriends);
+    });
 }
 
 // generate a random date between 2 parameters
 function handleRandomDate(from, to) {
   return new Date(from.getTime() + Math.random() * (to.getTime() - from.getTime()));
+}
+
+function handleRandomStatus(status) {
+  // create a random nr between 0 and length of the array
+  const random = Math.floor(Math.random() * status.length);
+
+  // return the number
+
+  console.log("test" + status[random]);
+  return status[random];
+}
+
+function handleModal(modal) {
+  // toggle modal
+  modal.classList.toggle("active");
+}
+
+function handleAddFriendsModal() {
+  console.log(`handleModalclicked`);
+}
+
+function handleBlockedPlayers() {
+  console.log(`handleBlockedPlayersclicked`);
 }
 
 function handleFriendMenu() {

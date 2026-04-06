@@ -1,7 +1,7 @@
 {
   "friends": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Xaphan64",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "online",
@@ -9,7 +9,7 @@
       "birthDate": "1994-05-06"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "ShadowStrikeX",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "offline",
@@ -17,7 +17,7 @@
       "birthDate": "2000-04-03"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "NovaKnight35",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "away",
@@ -25,7 +25,7 @@
       "birthDate": "1990-08-30"
     },
     {
-      "id": 3,
+      "id": "4",
       "name": "Quest Master'05",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "busy",
@@ -33,7 +33,7 @@
       "birthDate": "2005-12-24"
     },
     {
-      "id": 4,
+      "id": "5",
       "name": "BlackDevil666",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "offline",
@@ -41,7 +41,7 @@
       "birthDate": "1989-01-13"
     },
     {
-      "id": 5,
+      "id": "6",
       "name": "Neon Ninja7",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "offline",
@@ -49,7 +49,7 @@
       "birthDate": "2002-08-11"
     },
     {
-      "id": 6,
+      "id": "7",
       "name": "DarkRanger7",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "online",
@@ -57,12 +57,13 @@
       "birthDate": "2001-04-03"
     },
     {
-      "id": 7,
+      "id": "8",
       "name": "LeroyJenkins",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "online",
       "nickname": "",
       "birthDate": "1995-03-08"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
