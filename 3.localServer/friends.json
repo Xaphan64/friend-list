@@ -63,30 +63,6 @@
       "status": "online",
       "nickname": "",
       "birthDate": "1995-03-08"
-    },
-    {
-      "id": "u26EhdxQ_Js",
-      "name": "daniel",
-      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1775484349774",
-      "nickname": ""
-    },
-    {
-      "id": "w_bwBEtvOQ8",
-      "name": "daniel",
-      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1775484353698",
-      "nickname": ""
-    },
-    {
-      "id": "vhfYYtmjxwo",
-      "name": "test",
-      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1775484439495",
-      "nickname": ""
-    },
-    {
-      "id": "WamxZCbMw0o",
-      "name": "test2223123",
-      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1775484443623",
-      "nickname": ""
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
