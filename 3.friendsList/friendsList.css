@@ -85,6 +85,10 @@
   transition: 0.5s;
 }
 
+.moreOptions.active {
+  display: flex;
+}
+
 .friendDropdown {
   display: none;
   position: absolute;

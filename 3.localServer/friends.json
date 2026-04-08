@@ -65,13 +65,6 @@
       "birthDate": "1995-03-08"
     }
   ],
-  "blocked": [
-    {
-      "id": "LGvpwZggwYY",
-      "name": "test",
-      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1775545373374",
-      "nickname": ""
-    }
-  ],
+  "blocked": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

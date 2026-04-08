@@ -330,8 +330,6 @@ function handleRandomStatus(status) {
   const random = Math.floor(Math.random() * status.length);
 
   // return the number
-
-  console.log("test" + status[random]);
   return status[random];
 }
 

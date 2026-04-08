@@ -13,22 +13,22 @@ name (you can add a timer before the retry is allowed)
     • Think of other methods that you find useful -->
 
 <!-- de facut un friends list, data din json server, friend = id, name, icon, status, nickname (optional) - DONE
-filtru cu friends care sunt online/offline  
-sort alphabetically, by birthdate 
-searchbar and search function 
-de facut add friend - brirthday and status sa fie random cand adaugi un prieten 
-de facut all friends sa fie by default aranjat alfabetic ?
-de facut 3 puncte cu remove friend, set nickname 
+filtru cu friends care sunt online/offline - DONE
+sort alphabetically, by birthdate - DONE
+searchbar and search function - DONE 
+de facut add friend - brirthday and status sa fie random cand adaugi un prieten - DONE
+de facut all friends sa fie by default aranjat alfabetic ? - cut
+de facut 3 puncte cu remove friend, set nickname - DONE
 block friends si dupa o lista separata cu prieteni blocati 
 de schimbat mesajul de eroare cand nu isi face fetch sa scrie 404 or something 
 de pus random background pe styling la icons ?
-daca online bulina verde, daca offline, gry, daca away, galbena 
+daca online bulina verde, daca offline, gry, daca away, galbena - DONE
 de facut blocked list
-modala cand vrei sa dai block
+modala cand vrei sa dai block - DONE
 de facut blocked list mesaj cand e gol
 de facut friends mesaj cand e gol cu buton
 de facut mesaj cand vrei sa adaugi un friend blocked ca nu se poate 
-de bagat si chat option ? when clicked add modal with messages -->
+de bagat si chat option ? when clicked add modal with messages - cut -->
 
 <!doctype html>
 <html lang="en">
@@ -62,7 +62,7 @@ de bagat si chat option ? when clicked add modal with messages -->
 
       <div class="buttonContainer">
         <button type="button" class="addFriendModalButton" onclick="handleAddFriendModal()">Add Friend</button>
-        <button type="button" class="blocklistButton">Blocklist</button>
+        <button type="button" class="blocklistButton" onclick="handleRedirectBlocklist()">Blocklist</button>
         <div class="addFriendModal">
           <form class="addFriendForm">
             <p>Add a new friend to your list</p>
@@ -80,7 +80,48 @@ de bagat si chat option ? when clicked add modal with messages -->
         </div>
       </div>
 
+      <form class="searchForm">
+        <!-- de bagat search icon in input ?  -->
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          name="search"
+          class="searchInput"
+          placeholder="Seach for a friend..."
+          onkeyup="handleSearchFriend()"
+        />
+
+        <!-- de facut butonul X cand e empty sa nu apara, cand e scris sa apara si sa stearga tot textul -->
+        <!-- de bagat X-ul in interiorul inputului -->
+        <button type="button" class="clearButton" onclick="handleClearInput()">
+          <i class="fa-solid fa-x"></i>
+        </button>
+
+        <div class="menuModal">
+          <button type="button" class="addFriend" onclick="handleAddFriendsModal()">Add Friend</button>
+          <button type="button" class="blockedPlayers" onclick="handleBlockedPlayers()">Blocked Players</button>
+        </div>
+      </form>
+
+      <div class="filtersContainer">
+        <div class="filterButtonContainer">
+          <button type="button" class="allFriends" onclick="handleAllFriends()">All ✓</button>
+
+          <button type="button" class="onlineFriends" onclick="handleFilterOnline()">Online</button>
+        </div>
+
+        <div class="sortButtonContainer">
+          <p>Sort by:</p>
+
+          <button type="button" class="alphabetically" onclick="handleFilterAlpha()">Name</button>
+
+          <button type="button" class="age" onclick="handleFilterAge()">Age</button>
+        </div>
+      </div>
+
       <div class="friendsContainer"></div>
+
+      <div class="emptyText">There are no results for you request.</div>
     </section>
 
     <!-- <div class="moreOptionsContainer">

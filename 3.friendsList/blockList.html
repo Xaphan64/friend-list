@@ -4,10 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Block List</title>
+
+    <link rel="stylesheet" type="text/css" href="friendsList.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   </head>
   <body>
-    <h1>Block List</h1>
+    <section class="friendAppContainer">
+      <h1>Block List</h1>
 
-    <div class="blockContainer"></div>
+      <button type="button" class="blocklistButton" onclick="handleRedirectBlocklist()">Friend list</button>
+
+      <div class="blockContainer"></div>
+
+      <div class="errorContainer"></div>
+    </section>
+
+    <script src="blockList.js"></script>
   </body>
 </html>
