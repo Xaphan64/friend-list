@@ -19,15 +19,15 @@ searchbar and search function - DONE
 de facut add friend - brirthday and status sa fie random cand adaugi un prieten - DONE
 de facut all friends sa fie by default aranjat alfabetic ? - cut
 de facut 3 puncte cu remove friend, set nickname - DONE
-block friends si dupa o lista separata cu prieteni blocati 
+block friends si dupa o lista separata cu prieteni blocati - DONE
 de schimbat mesajul de eroare cand nu isi face fetch sa scrie 404 or something 
 de pus random background pe styling la icons ?
 daca online bulina verde, daca offline, gry, daca away, galbena - DONE
-de facut blocked list
-modala cand vrei sa dai block - DONE
-de facut blocked list mesaj cand e gol
-de facut friends mesaj cand e gol cu buton
-de facut mesaj cand vrei sa adaugi un friend blocked ca nu se poate 
+de facut blocked list - DONE
+modala cand vrei sa dai block - cut
+de facut blocked list mesaj cand e gol - DONE
+de facut friends mesaj cand e gol cu buton - DONE
+de facut mesaj cand vrei sa adaugi un friend blocked ca nu se poate - cut
 de bagat si chat option ? when clicked add modal with messages - cut -->
 
 <!doctype html>
@@ -61,23 +61,8 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
       <!-- <button type="button" class="moreOptions"><i class="fa-solid fa-ellipsis-vertical"></i>test</button> -->
 
       <div class="buttonContainer">
-        <button type="button" class="addFriendModalButton" onclick="handleAddFriendModal()">Add Friend</button>
+        <button type="button" class="addFriendModalButton" onclick="handleAddFriendsModal()">Add Friend</button>
         <button type="button" class="blocklistButton" onclick="handleRedirectBlocklist()">Blocklist</button>
-        <div class="addFriendModal">
-          <form class="addFriendForm">
-            <p>Add a new friend to your list</p>
-            <input
-              type="text"
-              placeholder="Type Friend name that you want to add..."
-              name="friendName"
-              class="friendName"
-            />
-            <button type="submit" class="addFriendButton" onclick="handleAddFriend(event)">Add</button>
-            <button type="button" class="addFriendCancelButton" onclick="handleCloseAddFriendModal()">
-              Cancel
-            </button>
-          </form>
-        </div>
       </div>
 
       <form class="searchForm">
@@ -119,6 +104,16 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
         </div>
       </div>
 
+      <button type="button" class="friendsListButton" onclick="handleShowFriends()">
+        <div class="friendsIcon">
+          <i class="fa-solid fa-angle-up"></i>
+          <!-- <i class="fa-solid fa-angle-down"></i> -->
+        </div>
+        <p class="friendsText">Friends</p>
+      </button>
+
+      <div class="friendsListButtonContainer"></div>
+
       <div class="friendsContainer"></div>
 
       <div class="emptyText">There are no results for you request.</div>
@@ -141,6 +136,26 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
         <button type="button" onclick="handleDeleteFriend('${friend.id}')">Remove from friends</button>
       </div>
     </div> -->
+
+    <div class="friendlistEmptyContainer">
+      <p>You don't have any friends, you can add a friend by clicking on add friend:</p>
+      <button type="button" class="addFriend" onclick="handleAddFriendsModal()">Add Friend</button>
+    </div>
+
+    <div class="addFriendModal">
+      <form class="addFriendForm">
+        <p>Add a new friend to your list</p>
+        <input
+          type="text"
+          placeholder="Type Friend name that you want to add..."
+          name="friendName"
+          class="friendName"
+          required
+        />
+        <button type="submit" class="addFriendButton" onclick="handleAddFriend(event)">Add</button>
+        <button type="button" class="addFriendCancelButton" onclick="handleCloseAddFriendModal()">Cancel</button>
+      </form>
+    </div>
 
     <!-- de facut styling la eroare -->
     <div class="errorContainer"></div>

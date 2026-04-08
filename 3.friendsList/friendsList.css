@@ -5,6 +5,10 @@
   margin: 0;
 }
 
+body {
+  overflow-y: scroll;
+}
+
 .friendAppContainer {
   display: flex;
   flex-direction: column;
@@ -146,4 +150,9 @@
 
 .menuModal.active {
   display: flex;
+}
+
+.friendsListButton {
+  display: flex;
+  gap: 8px;
 }

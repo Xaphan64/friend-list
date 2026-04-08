@@ -23,11 +23,10 @@ window.addEventListener("DOMContentLoaded", () => {
       // all friends
       friends = data;
 
-      // // online friends filter
-      // filters.online = friends.filter((friend) => friend.status !== "offline");
-
       // render initial friends list
       handleRender(friends);
+
+      handleEmptyBlocklist(friends);
     })
     .catch((error) => {
       // show error in console and in html
@@ -151,4 +150,14 @@ function handleUnblockFriend(id) {
 function handleRedirectBlocklist() {
   // redirect to the blocked list
   window.location.href = "friendsList.html";
+}
+
+function handleEmptyBlocklist(friends) {
+  if (friends.length === 0) {
+    document.querySelector(".friendAppContainer").style.display = "none";
+    document.querySelector(".blocklistEmptyContainer").style.display = "flex";
+  } else {
+    document.querySelector(".friendAppContainer").style.display = "flex";
+    document.querySelector(".blocklistEmptyContainer").style.display = "none";
+  }
 }

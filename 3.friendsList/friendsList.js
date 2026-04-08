@@ -2,7 +2,7 @@
 // go to folder where json is located with terminal and then npx json-server friends.json
 // (add --port 30XX if its not working) and CTRL + C to stop
 
-`use strict`;
+// `use strict`;
 
 // create a global friends variable
 let friends = [];
@@ -13,6 +13,7 @@ let friendDropdownModal = false;
 let isAlpha;
 let isAge;
 let isOnline = false;
+let isFriends = true;
 
 // create a global filters
 const filters = {};
@@ -22,7 +23,9 @@ const urlFriends = "http://localhost:3000/friends";
 const urlBlocked = "http://localhost:3000/blocked";
 
 // get elements
+const appContainer = document.querySelector(".friendAppContainer");
 const friendsContainer = document.querySelector(".friendsContainer");
+const friendsText = document.querySelector(".friendsText");
 const addFriendInput = document.querySelector(".friendName");
 const friendNicknameInput = document.querySelector(".friendNickname");
 const moreOptionsBtn = document.querySelector(".moreOptions");
@@ -38,6 +41,10 @@ const searchInput = document.querySelector(".searchInput");
 const filterContainer = document.querySelector(".filterButtonContainer");
 const sortContainer = document.querySelector(".sortButtonContainer");
 const emptyText = document.querySelector(".emptyText");
+const addFriendForm = document.querySelector(".addFriendForm");
+const friendsListButtonContainer = document.querySelector(".friendsListButtonContainer");
+const friendsIcon = document.querySelector(".friendsIcon");
+const friendListEmptyContainer = document.querySelector(".friendlistEmptyContainer");
 
 // fetch the data on page load
 window.addEventListener("DOMContentLoaded", () => {
@@ -60,6 +67,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
       // render initial friends list
       handleRender(friends);
+
+      // if friends is empty
+      handleEmptyFriendslist(friends);
     })
     .catch((error) => {
       // show error in console and in html
@@ -73,7 +83,9 @@ function handleFetchError(error) {
     // if there is an error don't show error and don't show friends page
     document.querySelector(".errorContainer").innerHTML =
       `<p class="error">Error loading data: ${error.message}</p>`;
-    document.querySelector(".friendAppContainer").style.display = "none";
+    // don't show other elements
+    appContainer.style.display = "none";
+    friendListEmptyContainer.style.display = "none";
   }
 }
 
@@ -138,11 +150,24 @@ function handleRender(data) {
   });
   // insert the friendlist into the html friendsContainer
   friendsContainer.innerHTML = friendList;
+
+  // show the friends length
+  handleFriendsLenght(data);
+
+  isFriends = true;
 }
 
 function handleAllFriends() {
   // change isOnline status
   isOnline = false;
+  isFriends = true;
+
+  // reset show friends on tab change
+  friendsContainer.style.display = "flex";
+  isFriends = true;
+  friendsIcon.innerHTML = isFriends
+    ? '<i class="fa-solid fa-angle-up"></i>'
+    : '<i class="fa-solid fa-angle-down"></i>';
 
   // DE VAZUT DACA MERGE REFACTOR PE BUTOANE IN FUNCTIE DE isOnline status
   // change button contents
@@ -165,6 +190,13 @@ function handleFilterOnline() {
   // change isOnline status
   isOnline = true;
 
+  // reset show friends on tab change
+  friendsContainer.style.display = "flex";
+  isFriends = true;
+  friendsIcon.innerHTML = isFriends
+    ? '<i class="fa-solid fa-angle-up"></i>'
+    : '<i class="fa-solid fa-angle-down"></i>';
+
   // change button contents
   onlineBtn.textContent = "Online ✓";
   allBtn.textContent = "All";
@@ -175,6 +207,13 @@ function handleFilterOnline() {
 function handleFilterAlpha() {
   // toggle alpha on/off
   isAlpha = !isAlpha;
+
+  // reset show friends on filter change
+  friendsContainer.style.display = "flex";
+  isFriends = true;
+  friendsIcon.innerHTML = isFriends
+    ? '<i class="fa-solid fa-angle-up"></i>'
+    : '<i class="fa-solid fa-angle-down"></i>';
 
   // online friends filter
   const onlineFriends = friends.filter((friend) => friend.status !== "offline");
@@ -199,6 +238,13 @@ function handleFilterAlpha() {
 function handleFilterAge() {
   // toggle alpha on/off
   isAge = !isAge;
+
+  // reset show friends on filter change
+  friendsContainer.style.display = "flex";
+  isFriends = true;
+  friendsIcon.innerHTML = isFriends
+    ? '<i class="fa-solid fa-angle-up"></i>'
+    : '<i class="fa-solid fa-angle-down"></i>';
 
   // online friends filter
   const onlineFriends = friends.filter((friend) => friend.status !== "offline");
@@ -328,6 +374,12 @@ function handleAddFriend(e) {
 
   // get statuses
   const status = ["online", "online", "online", "online", "away", "away", "busy", "offline"];
+
+  // don't add if input is empty
+  if (addFriendInput.value === "") {
+    alert("You must type a name!");
+    return;
+  }
 
   // create a new friend object
   const newFriend = {
@@ -589,7 +641,7 @@ function handleCloseAllModals() {
   });
 }
 
-function handleAddFriendModal() {
+function handleAddFriendsModal() {
   // open modal
   addFriendModal.style.display = "flex";
 }
@@ -605,4 +657,33 @@ function handleCloseAddFriendModal() {
 function handleRedirectBlocklist() {
   // redirect to the blocked list
   window.location.href = "blockList.html";
+}
+
+function handleEmptyFriendslist(friends) {
+  if (friends.length === 0) {
+    document.querySelector(".friendAppContainer").style.display = "none";
+    friendListEmptyContainer.style.display = "flex";
+  } else {
+    document.querySelector(".friendAppContainer").style.display = "flex";
+    friendListEmptyContainer.style.display = "none";
+  }
+}
+
+function handleFriendsLenght(friends) {
+  // offline filter
+  const onlineFriends = friends.filter((friend) => friend.status !== "offline");
+  // show length
+  friendsText.textContent = `Friends ${isOnline ? onlineFriends.length : friends.length}`;
+}
+
+function handleShowFriends() {
+  // toggle isFriends
+  isFriends = !isFriends;
+
+  // show or hide all friends
+  friendsContainer.style.display = isFriends ? "flex" : "none";
+
+  friendsIcon.innerHTML = isFriends
+    ? '<i class="fa-solid fa-angle-up"></i>'
+    : '<i class="fa-solid fa-angle-down"></i>';
 }
