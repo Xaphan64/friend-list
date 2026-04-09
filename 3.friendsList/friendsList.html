@@ -24,7 +24,7 @@ de schimbat mesajul de eroare cand nu isi face fetch sa scrie 404 or something
 de pus random background pe styling la icons ?
 daca online bulina verde, daca offline, gry, daca away, galbena - DONE
 de facut blocked list - DONE
-modala cand vrei sa dai block - cut
+modala cand vrei sa dai block - DONE
 de facut blocked list mesaj cand e gol - DONE
 de facut friends mesaj cand e gol cu buton - DONE
 de facut mesaj cand vrei sa adaugi un friend blocked ca nu se poate - cut
@@ -72,7 +72,7 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
           type="text"
           name="search"
           class="searchInput"
-          placeholder="Seach for a friend..."
+          placeholder="Search for any friend"
           onkeyup="handleSearchFriend()"
         />
 
@@ -90,13 +90,13 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
 
       <div class="filtersContainer">
         <div class="filterButtonContainer">
-          <button type="button" class="allFriends" onclick="handleAllFriends()">All ✓</button>
+          <button type="button" class="allFriends activeButton" onclick="handleAllFriends()">All ✓</button>
 
           <button type="button" class="onlineFriends" onclick="handleFilterOnline()">Online</button>
         </div>
 
         <div class="sortButtonContainer">
-          <p>Sort by:</p>
+          <!-- <p>Sort by:</p> -->
 
           <button type="button" class="alphabetically" onclick="handleFilterAlpha()">Name</button>
 
@@ -109,7 +109,8 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
           <i class="fa-solid fa-angle-up"></i>
           <!-- <i class="fa-solid fa-angle-down"></i> -->
         </div>
-        <p class="friendsText">Friends</p>
+        <p>Friends</p>
+        <div class="friendsText"></div>
       </button>
 
       <div class="friendsListButtonContainer"></div>
@@ -138,7 +139,8 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
     </div> -->
 
     <div class="friendlistEmptyContainer">
-      <p>You don't have any friends, you can add a friend by clicking on add friend:</p>
+      <h3>No friends yet!</h3>
+      <p>Use the below button to add friend to your list:</p>
       <button type="button" class="addFriend" onclick="handleAddFriendsModal()">Add Friend</button>
     </div>
 

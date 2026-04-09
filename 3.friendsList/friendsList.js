@@ -43,8 +43,11 @@ const sortContainer = document.querySelector(".sortButtonContainer");
 const emptyText = document.querySelector(".emptyText");
 const addFriendForm = document.querySelector(".addFriendForm");
 const friendsListButtonContainer = document.querySelector(".friendsListButtonContainer");
+const friendsListButton = document.querySelector(".friendsListButton");
 const friendsIcon = document.querySelector(".friendsIcon");
 const friendListEmptyContainer = document.querySelector(".friendlistEmptyContainer");
+const filterButtons = document.querySelectorAll(".filterButtonContainer button");
+const sortButtons = document.querySelectorAll(".sortButtonContainer button");
 
 // fetch the data on page load
 window.addEventListener("DOMContentLoaded", () => {
@@ -282,11 +285,13 @@ function handleSearchFriend() {
     filterContainer.style.display = "none";
     sortContainer.style.display = "none";
     clearBtn.style.visibility = "visible";
+    friendsListButton.style.display = "none";
     // else make buttons appear and clear disappear
   } else {
     filterContainer.style.display = "flex";
     sortContainer.style.display = "flex";
     clearBtn.style.visibility = "hidden";
+    friendsListButton.style.display = "flex";
   }
 
   // change button contents
@@ -312,6 +317,7 @@ function handleClearInput() {
     filterContainer.style.display = "flex";
     sortContainer.style.display = "flex";
     clearBtn.style.visibility = "hidden";
+    friendsListButton.style.display = "flex";
   }
 
   // change button contents
@@ -661,10 +667,10 @@ function handleRedirectBlocklist() {
 
 function handleEmptyFriendslist(friends) {
   if (friends.length === 0) {
-    document.querySelector(".friendAppContainer").style.display = "none";
+    appContainer.style.display = "none";
     friendListEmptyContainer.style.display = "flex";
   } else {
-    document.querySelector(".friendAppContainer").style.display = "flex";
+    appContainer.style.display = "flex";
     friendListEmptyContainer.style.display = "none";
   }
 }
@@ -673,7 +679,8 @@ function handleFriendsLenght(friends) {
   // offline filter
   const onlineFriends = friends.filter((friend) => friend.status !== "offline");
   // show length
-  friendsText.textContent = `Friends ${isOnline ? onlineFriends.length : friends.length}`;
+  const number = isOnline ? onlineFriends.length : friends.length;
+  friendsText.innerHTML = `<span class="friendsCount">${number}</span>`;
 }
 
 function handleShowFriends() {
@@ -687,3 +694,24 @@ function handleShowFriends() {
     ? '<i class="fa-solid fa-angle-up"></i>'
     : '<i class="fa-solid fa-angle-down"></i>';
 }
+
+filterButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    // remove from all buttons
+    filterButtons.forEach((b) => b.classList.remove("activeButton"));
+    sortButtons.forEach((b) => b.classList.remove("activeButton"));
+
+    // add to clicked buttons
+    btn.classList.add("activeButton");
+  });
+});
+
+sortButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    // remove from all buttons
+    sortButtons.forEach((b) => b.classList.remove("activeButton"));
+
+    // add to clicked buttons
+    btn.classList.add("activeButton");
+  });
+});
