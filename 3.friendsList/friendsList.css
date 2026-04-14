@@ -41,36 +41,55 @@ body::before {
 .friendsContainer {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  /* gap: 8px; */
+  background: transparent;
 }
 
 .friendCard {
   display: flex;
   gap: 16px;
+  padding: 8px;
   align-items: center;
   position: relative;
   width: 500px;
-  border: 1px solid red;
+  background-color: rgba(19, 13, 19);
+  border-radius: 8px;
+  /* border: 1px solid red; */
 }
 
 .imageContainer {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  background-color: rgba(19, 13, 19);
+  border-radius: 8px;
 }
 
 .friendCard .imageContainer img {
   border-radius: 50%;
+  background-color: rgba(19, 13, 19);
 }
 
-.imageContainer {
-  position: relative;
+.nameContainer,
+.friendName,
+.friendNickname,
+.friendStatus,
+.friendDate {
+  display: flex;
+  gap: 4px;
+  background-color: rgba(19, 13, 19);
 }
 
 .imageContainer svg {
   position: absolute;
-  background-color: transparent;
+  background-color: transparent !important;
   bottom: 5px;
   right: 5px;
+}
+
+.friendCard:hover,
+.friendCard:hover * {
+  background-color: rgba(36, 30, 36);
 }
 
 .friendCard:hover .moreOptions {
@@ -92,7 +111,7 @@ body::before {
 }
 
 .moreOptionsContainer .moreOptions {
-  background-color: black;
+  background-color: rgba(36, 30, 36);
   color: white;
   width: 40px;
   height: 40px;
@@ -101,13 +120,13 @@ body::before {
   border-radius: 50%;
   cursor: pointer;
   position: absolute;
-  right: 0;
+  right: 8px;
   /* visibility: hidden; */
   display: none;
 }
 
 .moreOptions:hover {
-  background-color: gray;
+  background-color: rgba(52, 47, 52);
   transition: 0.5s;
 }
 
@@ -184,6 +203,9 @@ body::before {
   font-size: 32px;
   padding: 16px;
   background: transparent;
+  /* background-color: rgba(0, 0, 0, 0.6); */
+  border: 1px solid rgba(167, 166, 167);
+  background-color: rgba(35, 32, 35, 0.9);
 }
 
 h1 {
