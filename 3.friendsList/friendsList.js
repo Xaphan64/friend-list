@@ -107,7 +107,7 @@ function handleRender(data) {
     friendList += `
       <div class="friendCard">
         <div class="imageContainer">
-            <img src="${`${friend.icon}${friend.name}`}" alt="${friend.name}" />
+            <img src="${`${friend.icon}${friend.name}`}" alt="${friend.name}" style="background-color: ${friend.bgColor}" />
             <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
               <circle r="10" cx="10" cy="10" fill="${handleDotColor(friend.status)}" />
             </svg>
@@ -140,6 +140,8 @@ function handleRender(data) {
                 <button type="button" onclick="handleSubmitNickname('${friend.id}', this)">Confirm</button>
               </div>
             </div>
+
+            <hr>
 
             <button type="button" onclick="handleBlockFriend('${friend.id}')">Block</button>
 
@@ -364,7 +366,7 @@ function handleDotColor(status) {
   } else if (status === "busy") {
     return "#ff0000";
   }
-  return "gray";
+  return "#a8a8a8";
 }
 
 // capitalize 1st letter
@@ -394,6 +396,7 @@ function handleAddFriend(e) {
     icon: `https://api.dicebear.com/9.x/avataaars/svg?seed=${Date.now()}`,
     status: handleRandomStatus(status),
     nickname: "",
+    bgColor: handleRandomBgColor(),
     birthDate: handleRandomDate(new Date(1960, 1, 1), new Date(2019, 1, 1))
       .toISOString()
       .slice(0, 10),
@@ -431,6 +434,17 @@ function handleRandomStatus(status) {
 
   // return the number
   return status[random];
+}
+
+function handleRandomBgColor() {
+  // create a random value
+  let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
+  // add # + the random value to have a hex value
+  let hexValue = "#" + randomColor;
+
+  // return the value to be saved later
+  return hexValue;
 }
 
 function handleDeleteFriend(id) {

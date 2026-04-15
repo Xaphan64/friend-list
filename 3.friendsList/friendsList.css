@@ -29,7 +29,7 @@ body::before {
   align-items: center;
   gap: 8px;
   width: 900px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   /* background: rgba(0, 0, 0, 0.7); */
   background: rgba(20, 13, 20, 0.9);
   border: 1px solid rgba(36, 27, 36);
@@ -68,16 +68,19 @@ body::before {
 .friendCard .imageContainer img {
   border-radius: 50%;
   background-color: rgba(19, 13, 19);
+  /* background-color: blue; */
 }
 
-.nameContainer,
-.friendName,
-.friendNickname,
-.friendStatus,
-.friendDate {
+.nameContainer {
   display: flex;
   gap: 4px;
-  background-color: rgba(19, 13, 19);
+  font-size: 18px;
+  font-weight: 540;
+}
+
+.friendStatus,
+.friendDate {
+  color: rgba(181, 181, 181);
 }
 
 .imageContainer svg {
@@ -135,12 +138,38 @@ body::before {
 }
 
 .friendDropdown {
+  /* visibility: hidden; */
   display: none;
   position: absolute;
   right: 0%;
   top: 80%;
   flex-direction: column;
   z-index: 1;
+  padding: 8px;
+  /* background: transparent !important; */
+  background-color: rgba(43, 42, 43) !important;
+  border-radius: 8px;
+}
+
+.friendDropdown button {
+  border: none;
+  cursor: pointer;
+  padding: 16px;
+  background-color: rgba(43, 42, 43) !important;
+  border-radius: 8px;
+}
+
+.friendDropdown button:hover {
+  background-color: rgba(58, 56, 58) !important;
+}
+
+hr {
+  color: rgba(74, 73, 74);
+  background-color: rgba(74, 73, 74) !important;
+  border: none;
+  margin: 4px;
+  padding: 1px 0;
+  padding-top: 0;
 }
 
 .nicknameModal,
