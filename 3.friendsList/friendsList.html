@@ -152,12 +152,34 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
           placeholder="Type Friend name that you want to add..."
           name="friendName"
           class="friendName"
+          maxlength="32"
           required
         />
-        <button type="submit" class="addFriendButton" onclick="handleAddFriend(event)">Add</button>
-        <button type="button" class="addFriendCancelButton" onclick="handleCloseAddFriendModal()">Cancel</button>
+
+        <span>Maximum length is 32 characters</span>
+
+        <div class="addFriendButtonContainer">
+          <button type="button" class="addFriendCancelButton" onclick="handleCloseAddFriendModal()">
+            Cancel
+          </button>
+          <button type="submit" class="addFriendButton" onclick="handleAddFriend(event)">Add</button>
+        </div>
       </form>
     </div>
+
+    <!--  <div class="nicknameModal">
+      <div class="nicknameModalContent">
+        <p>Set nickname for ${friend.name}</p>
+        <input type="text" class="friendNickname" placeholder="Add a nickname" maxlength="32" />
+
+        <span>Maximum length is 32 characters</span>
+
+        <div class="nicknamModalButtonContainer">
+          <button type="button" onclick="handleCloseAllModals()">Close</button>
+          <button type="button" onclick="handleSubmitNickname('${friend.id}', this)">Confirm</button>
+        </div>
+      </div>
+    </div> -->
 
     <!-- de facut styling la eroare -->
     <div class="errorContainer"></div>

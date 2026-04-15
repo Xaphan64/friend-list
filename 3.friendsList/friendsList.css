@@ -28,14 +28,16 @@ body::before {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  width: 900px;
-  /* min-height: 100vh; */
+  width: 550px;
+  /* width: 900px; */
+  min-height: 100vh;
   /* background: rgba(0, 0, 0, 0.7); */
   background: rgba(20, 13, 20, 0.9);
   border: 1px solid rgba(36, 27, 36);
   border-top: none;
   border-bottom: none;
   padding: 16px 0;
+  box-sizing: border-box;
 }
 
 .friendsContainer {
@@ -76,11 +78,30 @@ body::before {
   gap: 4px;
   font-size: 18px;
   font-weight: 540;
+  max-width: 380px;
+}
+
+.friendName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.friendNickname {
+  color: rgba(166, 181, 147);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  flex-shrink: 2;
+  min-width: 0;
 }
 
 .friendStatus,
 .friendDate {
   color: rgba(181, 181, 181);
+  user-select: none;
 }
 
 .imageContainer svg {
@@ -163,6 +184,11 @@ body::before {
   background-color: rgba(58, 56, 58) !important;
 }
 
+.friendDropdown.up {
+  top: auto;
+  bottom: 80%;
+}
+
 hr {
   color: rgba(74, 73, 74);
   background-color: rgba(74, 73, 74) !important;
@@ -172,6 +198,7 @@ hr {
   padding-top: 0;
 }
 
+/* overlay */
 .nicknameModal,
 .addFriendModal {
   display: none;
@@ -181,19 +208,103 @@ hr {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4) !important;
 }
 
+/* modal */
 .nicknameModalContent,
 .addFriendForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 8px;
   padding: 16px;
-  background-color: #fefefe;
-  border: 1px solid #888;
+  background-color: rgba(40, 40, 40);
+  border: none;
   position: absolute;
-  left: 40%;
+  left: 50%;
   top: 50%;
-  transform: translate(50%, 50%);
+  transform: translate(-50%, -50%);
+}
+
+.nicknameModalContent p,
+.addFriendForm p {
+  max-width: 400px;
+  background-color: rgba(40, 40, 40);
+  font-size: 20px;
+  font-weight: 550;
+}
+
+.nicknameModalContent span,
+.addFriendForm span {
+  background-color: rgba(40, 40, 40);
+  color: rgba(166, 166, 166);
+}
+
+.addFriendButtonContainer,
+.nicknamModalButtonContainer {
+  background-color: rgba(40, 40, 40);
+}
+
+.addFriendForm input,
+.nicknameModalContent input {
+  padding: 8px 16px;
+  width: 400px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 2px solid rgba(71, 71, 71);
+  background-color: rgba(56, 56, 56) !important;
+}
+
+.addFriendForm input:focus,
+.nicknameModalContent input:focus {
+  outline: none;
+  border: 2px solid rgba(176, 176, 176);
+  background-color: rgba(56, 56, 56) !important;
+}
+
+.addFriendButtonContainer,
+.nicknamModalButtonContainer {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.addFriendButtonContainer .addFriendButton,
+.nicknamModalButtonContainer .nicknameEditButton,
+.friendlistEmptyContainer .addFriend {
+  padding: 16px;
+  background-color: rgba(0, 110, 245) !important;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.addFriendButtonContainer .addFriendButton:hover,
+.nicknamModalButtonContainer .nicknameEditButton:hover,
+.friendlistEmptyContainer .addFriend:hover {
+  background-color: rgba(0, 110, 245, 0.8) !important;
+  transition: 0.5s;
+}
+
+.addFriendButtonContainer .addFriendCancelButton,
+.nicknamModalButtonContainer .nicknameCancelButton {
+  border: none;
+  background-color: transparent !important;
+  cursor: pointer;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgba(61, 162, 255);
+  padding: 16px;
+}
+
+.addFriendButtonContainer .addFriendCancelButton:hover,
+.nicknamModalButtonContainer .nicknameCancelButton:hover {
+  background-color: rgba(38, 46, 56) !important;
+  color: rgba(60, 154, 241);
 }
 
 .sortButtonContainer {
@@ -203,6 +314,7 @@ hr {
 
 .emptyText {
   display: none;
+  font-size: 20px;
 }
 
 .menuModal {
@@ -223,7 +335,7 @@ hr {
   justify-content: center;
   align-items: center;
   background: transparent;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .error {
@@ -242,8 +354,10 @@ h1 {
   /* background: linear-gradient(90deg, #00c6ff 0%, #0072ff 25%, #6a00ff 70%, #6a00ff 100%); */
   /* background: linear-gradient(90deg, #1fd6ff 0%, #1f85ff 25%, #7a1fff 65%, #7a1fff 100%); */
   background: linear-gradient(90deg, #33e6ff 0%, #3399ff 25%, #8a33ff 60%, #8a33ff 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .buttonContainer {
@@ -252,10 +366,10 @@ h1 {
   padding: 0 0 8px 0;
 }
 .buttonContainer button {
-  padding: 8px 16px;
+  padding: 12px 24px;
   background-color: rgba(0, 110, 245);
   border: none;
-  border-radius: 16px;
+  border-radius: 24px;
   cursor: pointer;
   font-weight: bold;
   font-size: 16px;
@@ -383,4 +497,125 @@ h1 {
   background-color: rgba(71, 67, 71);
   padding: 4px 8px;
   border-radius: 4px;
+}
+
+.friendlistEmptyContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 550px;
+  background: rgba(20, 13, 20, 0.9);
+  border: 1px solid rgba(36, 27, 36);
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.friendlistEmptyContainer h3 {
+  background: rgba(20, 13, 20, 0.9);
+  font-size: 32px;
+}
+
+.friendlistEmptyContainer p {
+  font-size: 20px;
+}
+
+/* BLOCKLIST */
+.blocklistEmptyContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 550px;
+  background: rgba(20, 13, 20, 0.9);
+  border: 1px solid rgba(36, 27, 36);
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.blocklistEmptyContainer h3 {
+  background: rgba(20, 13, 20, 0.9);
+  font-size: 32px;
+  text-align: center;
+}
+
+.blocklistButton {
+  padding: 16px;
+  background-color: rgba(0, 110, 245) !important;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.blocklistButton:hover {
+  background-color: rgba(0, 110, 245, 0.8) !important;
+  transition: 0.5s;
+}
+
+.blockContainer .friendCard {
+  position: relative;
+}
+
+.blockContainer .friendCard .nameContainer {
+  max-width: 300px;
+}
+
+.blockContainer .friendCard .friendName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  max-width: 300px;
+}
+
+.blockContainer .friendCard .friendNickname {
+  color: rgba(166, 181, 147);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  flex-shrink: 2;
+}
+
+.blockContainer .friendCard .blocklistButtonContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  gap: 8px;
+  right: 8px;
+  /* visibility: hidden; */
+}
+
+.blockContainer .friendCard .blocklistButtonContainer button {
+  background-color: rgba(0, 110, 245);
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 8px;
+}
+
+.blockContainer .friendCard .blocklistButtonContainer button:hover {
+  background-color: rgba(0, 110, 245, 0.8) !important;
+  transition: 0.2s;
+}
+
+.blockContainer .friendCard .blocklistButtonContainer .removeButton {
+  background: transparent;
+  color: rgb(220, 38, 38);
+  border: 1px solid rgb(220, 38, 38);
+  padding: 8px 14px;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Option 3 (recommended) */
+.blockContainer .friendCard .blocklistButtonContainer .removeButton:hover {
+  background: rgba(220, 38, 38, 0.15) !important;
+  color: rgb(239, 68, 68);
+  border-color: rgb(239, 68, 68);
 }

@@ -54,42 +54,31 @@ function handleRender(data) {
     friendList += `
     <div class="friendCard">
       <div class="imageContainer">
-        <img src="${`${friend.icon}${friend.name}`}" alt="${friend.name}" />
+        <img src="${`${friend.icon}${friend.name}`}" alt="${friend.name}" style="background-color: ${friend.bgColor}" />
         <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
-          <circle r="10" cx="10" cy="10" fill="${handleDotColor(friend.status)}" />
+          <circle r="10" cx="10" cy="10" fill="#a8a8a8" />
         </svg>
       </div>
 
         <div class="textContainer">
-            <div class="nameContainer">
-                <p class="friendName">${friend.name}</p>
-                <p class="friendNickname">${friend.nickname == "" ? "" : `(${friend.nickname})`}</p>
-            </div>
+          <div class="nameContainer">
+              <p class="friendName">${friend.name}</p>
+              <p class="friendNickname">${friend.nickname == "" ? "" : `(${friend.nickname})`}</p>
+          </div>
 
-            <div class="friendStatus">${handleCapitalize(friend.status)}</div>
+          <div class="friendStatus">Unknown</div>
 
-            <div class="friendDate">${friend.birthDate}</div>
         </div>
 
-        <button type="button" onclick="handleDeleteFriend('${friend.id}')">Remove from block list</button>
-        <button type="button" onclick="handleUnblockFriend('${friend.id}')">Add back to friends</button>
+        <div class="blocklistButtonContainer">
+        <button type="button" onclick="handleUnblockFriend('${friend.id}')" class="addButton">Add to friends</button>
+        <button type="button" onclick="handleDeleteFriend('${friend.id}')" class="removeButton">Remove</button>
+        </div>
     </div>
     `;
   });
   // insert the friendlist into the html friendsContainer
   blockContainer.innerHTML = friendList;
-}
-
-// handle the dot color based on the status
-function handleDotColor(status) {
-  if (status === "online") {
-    return "#41ff00";
-  } else if (status === "away") {
-    return "#ffbc00";
-  } else if (status === "busy") {
-    return "#ff0000";
-  }
-  return "gray";
 }
 
 // capitalize 1st letter

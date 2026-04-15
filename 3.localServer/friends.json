@@ -1,34 +1,34 @@
 {
   "friends": [
     {
-      "id": "1",
+      "id": "K6HiWomtyuw",
       "name": "Xaphan64",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "online",
-      "nickname": "test",
+      "nickname": "Daniel",
       "bgColor": "#9b3ac2",
       "birthDate": "1994-05-06"
     },
     {
-      "id": "2",
+      "id": "qQnJeNPcPnc",
       "name": "ShadowStrikeX",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "offline",
-      "nickname": "",
+      "nickname": "1234567890 test 1234567890 testt",
       "bgColor": "#2b44c2",
       "birthDate": "2000-04-03"
     },
     {
-      "id": "3",
+      "id": "S8MkxIRcvZg",
       "name": "NovaKnight35",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "away",
-      "nickname": "",
+      "nickname": "testing the maximum length of th",
       "bgColor": "#4e9689",
       "birthDate": "1990-08-30"
     },
     {
-      "id": "4",
+      "id": "PCw3GIF3XqA",
       "name": "Quest Master'05",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "busy",
@@ -37,16 +37,16 @@
       "birthDate": "2005-12-24"
     },
     {
-      "id": "5",
+      "id": "LFeeYxoAMnI",
       "name": "BlackDevil666",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "offline",
       "nickname": "",
-      "bgColor": "#fffd6e",
+      "bgColor": "#4f2008",
       "birthDate": "1989-01-13"
     },
     {
-      "id": "6",
+      "id": "hLNQhhmpYxU",
       "name": "Neon Ninja7",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "offline",
@@ -55,7 +55,7 @@
       "birthDate": "2002-08-11"
     },
     {
-      "id": "7",
+      "id": "-tm_kdoXduY",
       "name": "DarkRanger7",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "online",
@@ -64,13 +64,130 @@
       "birthDate": "2001-04-03"
     },
     {
-      "id": "8",
+      "id": "oTqcKxqZryA",
       "name": "LeroyJenkins",
       "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=",
       "status": "online",
       "nickname": "",
       "bgColor": "#5a3563",
       "birthDate": "1995-03-08"
+    },
+    {
+      "id": "mB6C6ZlCpnE",
+      "name": "test test testtest test test tes",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776253746805",
+      "status": "busy",
+      "nickname": "testing the maximum length of th",
+      "bgColor": "#402423",
+      "birthDate": "1973-12-26"
+    },
+    {
+      "id": "wc3Fb9tPm-U",
+      "name": "1234567890 1234567890 1234567890",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776251471421",
+      "status": "online",
+      "nickname": "tester test",
+      "bgColor": "#695489",
+      "birthDate": "1965-12-06"
+    },
+    {
+      "id": "zcBdMM4MbYk",
+      "name": "wwwwwwwwww wwwwwwwwww wwwwwwwwww",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776252868687",
+      "status": "offline",
+      "nickname": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+      "bgColor": "#bd1913",
+      "birthDate": "1987-12-19"
+    },
+    {
+      "id": "0J2zmlJTB90",
+      "name": "blocked 1",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776256576886",
+      "status": "online",
+      "nickname": "",
+      "bgColor": "#e677d4",
+      "birthDate": "1994-03-24"
+    },
+    {
+      "id": "VXBfqq7MlDk",
+      "name": "blocked 2",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776256584789",
+      "status": "online",
+      "nickname": "test nick",
+      "bgColor": "#6d040b",
+      "birthDate": "1965-10-13"
+    },
+    {
+      "id": "xhVHgzaWYmo",
+      "name": "blocked 3",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776256592675",
+      "status": "online",
+      "nickname": "test nickname",
+      "bgColor": "#740e7f",
+      "birthDate": "1998-02-13"
+    },
+    {
+      "id": "FjqIwXj7OPM",
+      "name": "blocked 4",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776256597004",
+      "status": "offline",
+      "nickname": "test nickname test nickname",
+      "bgColor": "#329ea4",
+      "birthDate": "1983-05-22"
+    },
+    {
+      "id": "lCrvzRigaUU",
+      "name": "blocked 5",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776256605568",
+      "status": "away",
+      "nickname": "",
+      "bgColor": "#8b7fe1",
+      "birthDate": "1972-06-29"
+    },
+    {
+      "id": "GGXHOb4Mg20",
+      "name": "blocked 6",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776256610790",
+      "status": "online",
+      "nickname": "",
+      "bgColor": "#c04601",
+      "birthDate": "1960-03-03"
+    },
+    {
+      "id": "VQvewh3RJ6U",
+      "name": "blocked 7",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776256615457",
+      "status": "away",
+      "nickname": "",
+      "bgColor": "#f4ee7b",
+      "birthDate": "1995-05-06"
+    },
+    {
+      "id": "vtheCie0IKw",
+      "name": "blocked 8",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776256620496",
+      "status": "away",
+      "nickname": "test nickname",
+      "bgColor": "#e3b325",
+      "birthDate": "2012-12-24"
+    },
+    {
+      "id": "AxCX_fQpraM",
+      "name": "blocked 9",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776256630289",
+      "status": "online",
+      "nickname": "",
+      "bgColor": "#878e2f",
+      "birthDate": "1988-07-14"
+    },
+    {
+      "id": "uIqMI_FalQE",
+      "name": "blocked 10",
+      "icon": "https://api.dicebear.com/9.x/avataaars/svg?seed=1776256637933",
+      "status": "offline",
+      "nickname": "",
+      "bgColor": "#6b517",
+      "birthDate": "1972-03-27"
     }
   ],
   "blocked": [],

@@ -134,12 +134,17 @@ function handleRender(data) {
 
             <div class="nicknameModal">
               <div class="nicknameModalContent">
-                <p>Set nickname for ${friend.name} </p>
-                <input type="text" class="friendNickname" placeholder="Add a nickname"/>
-                <button type="button" onclick="handleCloseAllModals()">Close</button>
-                <button type="button" onclick="handleSubmitNickname('${friend.id}', this)">Confirm</button>
+                <p>${friend.nickname == "" ? "Set" : "Edit"} nickname for ${friend.name}</p>
+                <input type="text" class="friendNickname" placeholder="Add a nickname" maxlength="32" />
+
+                <span>Maximum length is 32 characters</span>
+
+              <div class="nicknamModalButtonContainer">
+                <button type="button" class="nicknameCancelButton" onclick="handleCloseAllModals()">Cancel</button>
+                <button type="button" class="nicknameEditButton" onclick="handleSubmitNickname('${friend.id}', this)">Confirm</button>
               </div>
             </div>
+          </div>
 
             <hr>
 
@@ -471,7 +476,7 @@ function handleClickNickname(id, el) {
   // find the correct modal (relative to button)
   const modal = el.closest(".friendDropdown").querySelector(".nicknameModal");
 
-  // find input inside THIS modal
+  // find input inside this modal
   const input = modal.querySelector(".friendNickname");
 
   // set value
@@ -601,28 +606,83 @@ function handleBlockFriend(id) {
 //   }
 // });
 
+// document.addEventListener("click", (e) => {
+//   // get the closest btn to the container
+//   const btn = e.target.closest(".moreOptions");
+
+//   if (btn) {
+//     // get the dropdown
+//     const dropdown = btn.closest(".moreOptionsContainer").querySelector(".friendDropdown");
+
+//     // open the modal
+//     const isOpen = dropdown.style.display === "flex";
+
+//     // close the modal for each other modals
+//     document.querySelectorAll(".friendDropdown").forEach((d) => {
+//       d.style.display = "none";
+//     });
+
+//     // toggle on/off
+//     dropdown.style.display = isOpen ? "none" : "flex";
+//     return;
+//   }
+
+//   // close only if clicking outside both modal and button
+//   if (!e.target.closest(".friendDropdown") && !e.target.closest(".nicknameModal")) {
+//     document.querySelectorAll(".friendDropdown").forEach((d) => {
+//       d.style.display = "none";
+//     });
+//   }
+// });
+
 document.addEventListener("click", (e) => {
+  // get the closest btn
   const btn = e.target.closest(".moreOptions");
 
   if (btn) {
-    const dropdown = btn.closest(".moreOptionsContainer").querySelector(".friendDropdown");
+    // get the parent of the button and dropdown to the clicked friend
+    const container = btn.closest(".moreOptionsContainer");
+    const dropdown = container.querySelector(".friendDropdown");
 
+    // show the dropdown of the clicked friend
     const isOpen = dropdown.style.display === "flex";
 
+    // close all modals first and remove up class
     document.querySelectorAll(".friendDropdown").forEach((d) => {
       d.style.display = "none";
+      d.classList.remove("up");
     });
 
+    if (!isOpen) {
+      // dropdown.style.visibility = "hidden";
+      dropdown.style.display = "flex";
+
+      const rect = btn.getBoundingClientRect();
+      const dropdownHeight = dropdown.offsetHeight;
+      const spaceBelow = window.innerHeight - rect.bottom;
+
+      // reset visibility
+      // dropdown.style.visibility = "visible";
+
+      // depending on the position open modal top or bottom
+      if (spaceBelow < dropdownHeight + 8) {
+        dropdown.classList.add("up");
+      } else {
+        dropdown.classList.remove("up");
+      }
+    }
+
+    // toggle on/off
     dropdown.style.display = isOpen ? "none" : "flex";
     return;
   }
 
-  // close only if clicking outside both modal AND button
-  // if (!e.target.closest(".friendDropdown") && !e.target.closest(".nicknameModal")) {
-  //   document.querySelectorAll(".friendDropdown").forEach((d) => {
-  //     d.style.display = "none";
-  //   });
-  // }
+  // close only if clicking outside both modal and button
+  if (!e.target.closest(".friendDropdown") && !e.target.closest(".nicknameModal")) {
+    document.querySelectorAll(".friendDropdown").forEach((d) => {
+      d.style.display = "none";
+    });
+  }
 });
 
 document.addEventListener("click", (e) => {
@@ -643,7 +703,7 @@ document.addEventListener("click", (e) => {
     return;
   }
 
-  // close only if clicking outside both modal AND button
+  // close only if clicking outside both modal and button
   // if (!e.target.closest(".nicknameModal") && !e.target.closest(".nicknameButton")) {
   //   document.querySelectorAll(".nicknameModal").forEach((d) => {
   //     d.style.display = "none";
