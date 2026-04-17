@@ -1,36 +1,3 @@
-<!-- 1. Random band name/game name generator
-    • Create 2 or 3 lists of options for band/game names. Pick an element from each list using
-Math.random().
-    • Allow user interaction (example: add name options in the list, pick from a list)
-    • Show the final name by the push of a button and allow the user to retry and generate a new
-name (you can add a timer before the retry is allowed)
-2. Friends list manager
-    • Define a friend object with multiple properties (example: name, date of birth)
-    • Display the friends list to a user
-    • A user can make the following actions:
-    • Add & Remove friends from a list
-    • Sort & Filter the friends list based on name, date added etc.
-    • Think of other methods that you find useful -->
-
-<!-- de facut un friends list, data din json server, friend = id, name, icon, status, nickname (optional) - DONE
-filtru cu friends care sunt online/offline - DONE
-sort alphabetically, by birthdate - DONE
-searchbar and search function - DONE 
-de facut add friend - brirthday and status sa fie random cand adaugi un prieten - DONE
-de facut all friends sa fie by default aranjat alfabetic ? - cut
-de facut 3 puncte cu remove friend, set nickname - DONE
-block friends si dupa o lista separata cu prieteni blocati - DONE
-de schimbat mesajul de eroare cand nu isi face fetch sa scrie 404 or something 
-de pus random background pe styling la icons ?
-daca online bulina verde, daca offline, gry, daca away, galbena - DONE
-de facut blocked list - DONE
-modala cand vrei sa dai block - DONE
-de facut blocked list mesaj cand e gol - DONE
-de facut friends mesaj cand e gol cu buton - DONE
-de facut mesaj cand vrei sa adaugi un friend blocked ca nu se poate - cut
-de fixat bugul cand ai lista goala nu apare mesajul decat dupa refresh 
-de bagat si chat option ? when clicked add modal with messages - cut -->
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -44,30 +11,12 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
     <section class="friendAppContainer">
       <h1>Friends List</h1>
 
-      <!-- <button type="button" onclick="handleAddFriend(event)">test</button>
-      <input
-        type="text"
-        placeholder="Type Friend name that you want to add..."
-        name="friendName"
-        class="friendName"
-      />
-
-      <input
-        type="text"
-        placeholder="Add a nickname to you friend..."
-        name="friendNickname"
-        class="friendNickname"
-      /> -->
-      <!-- <h1>test</h1> -->
-      <!-- <button type="button" class="moreOptions"><i class="fa-solid fa-ellipsis-vertical"></i>test</button> -->
-
       <div class="buttonContainer">
         <button type="button" class="addFriendModalButton" onclick="handleAddFriendsModal()">Add Friend</button>
         <button type="button" class="blocklistButton" onclick="handleRedirectBlocklist()">Blocklist</button>
       </div>
 
       <form class="searchForm">
-        <!-- de bagat search icon in input ?  -->
         <i class="fa-solid fa-magnifying-glass"></i>
         <input
           type="text"
@@ -77,8 +26,6 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
           onkeyup="handleSearchFriend()"
         />
 
-        <!-- de facut butonul X cand e empty sa nu apara, cand e scris sa apara si sa stearga tot textul -->
-        <!-- de bagat X-ul in interiorul inputului -->
         <button type="button" class="clearButton" onclick="handleClearInput()">
           <i class="fa-solid fa-x"></i>
         </button>
@@ -121,24 +68,6 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
       <div class="emptyText">There are no results for you request.</div>
     </section>
 
-    <!-- <div class="moreOptionsContainer">
-      <button type="button" class="moreOptions" onclick="handleModal(friendDropdown, friendDropdownModal)">
-        <i class="fa-solid fa-ellipsis-vertical"></i>
-      </button>
-
-      <div class="friendDropdown">
-        <button type="button" onclick="handleClickNickname('${friend.id}')">Set/Edit Nickname</button>
-
-        <div class="nicknameModal">
-          <button type="button" onclick="handleSubmitNickname('${friend.id}')">Confirm (edit nickname)</button>
-        </div>
-
-        <button type="button" onclick="handleBlockFriend('${friend.id}')">Block</button>
-
-        <button type="button" onclick="handleDeleteFriend('${friend.id}')">Remove from friends</button>
-      </div>
-    </div> -->
-
     <div class="friendlistEmptyContainer">
       <h3>No friends yet!</h3>
       <p>Use the below button to add friend to your list:</p>
@@ -168,21 +97,6 @@ de bagat si chat option ? when clicked add modal with messages - cut -->
       </form>
     </div>
 
-    <!--  <div class="nicknameModal">
-      <div class="nicknameModalContent">
-        <p>Set nickname for ${friend.name}</p>
-        <input type="text" class="friendNickname" placeholder="Add a nickname" maxlength="32" />
-
-        <span>Maximum length is 32 characters</span>
-
-        <div class="nicknamModalButtonContainer">
-          <button type="button" onclick="handleCloseAllModals()">Close</button>
-          <button type="button" onclick="handleSubmitNickname('${friend.id}', this)">Confirm</button>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- de facut styling la eroare -->
     <div class="errorContainer"></div>
     <script src="friendsList.js"></script>
   </body>

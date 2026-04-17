@@ -65,9 +65,6 @@ window.addEventListener("DOMContentLoaded", () => {
       // all friends
       friends = data;
 
-      // // online friends filter
-      // filters.online = friends.filter((friend) => friend.status !== "offline");
-
       // render initial friends list
       handleRender(friends);
 
@@ -146,11 +143,11 @@ function handleRender(data) {
             </div>
           </div>
 
-            <hr>
+          <hr>
 
-            <button type="button" onclick="handleBlockFriend('${friend.id}')">Block</button>
+          <button type="button" onclick="handleBlockFriend('${friend.id}')">Block</button>
 
-            <button type="button" onclick="handleDeleteFriend('${friend.id}')">Remove from friends</button>
+          <button type="button" onclick="handleDeleteFriend('${friend.id}')">Remove from friends</button>
           </div>
         </div>
 
@@ -165,6 +162,9 @@ function handleRender(data) {
   handleFriendsLenght(data);
 
   isFriends = true;
+
+  // show message when list gets empty
+  handleEmptyFriendslist(data);
 }
 
 function handleAllFriends() {
@@ -179,7 +179,6 @@ function handleAllFriends() {
     ? '<i class="fa-solid fa-angle-up"></i>'
     : '<i class="fa-solid fa-angle-down"></i>';
 
-  // DE VAZUT DACA MERGE REFACTOR PE BUTOANE IN FUNCTIE DE isOnline status
   // change button contents
   onlineBtn.textContent = "Online";
   allBtn.textContent = "All ✓";
@@ -484,7 +483,6 @@ function handleClickNickname(id, el) {
 }
 
 function handleSubmitNickname(id, el) {
-  // e.preventDefault();
   // find the correct modal
   const modal = el.closest(".nicknameModal");
 
@@ -545,96 +543,6 @@ function handleBlockFriend(id) {
     .catch((err) => console.error(err));
 }
 
-// function handleModal(modal, boolean, id) {
-//   // toggle status on/off
-//   boolean = !boolean;
-
-//   console.log(boolean, modal);
-
-//   // show modal if boolean true
-//   if (boolean) {
-//     modal.style.display = "flex";
-//   } else {
-//     modal.style.display = "none";
-//   }
-
-// // close modal when clicked outside
-// window.onclick = (event) => {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// };
-// }
-
-// moreOptionsBtn.addEventListener(`click`, () => {
-//   modal.style.display = "flex";
-// });
-
-// window.addEventListener("click", (event) => {
-//   if (event.target === modal) {
-//     modal.style.display = "none";
-//   }
-// });
-
-// document.addEventListener("click", (e) => {
-//   const btn = e.target.closest(".moreOptions");
-
-//   if (btn) {
-//     const dropdown = btn.closest(".moreOptionsContainer").querySelector(".friendDropdown");
-
-//     // open current dropdown
-//     const isOpen = dropdown.style.display === "flex";
-
-//     // get all dropdowns and close them
-//     document.querySelectorAll(".friendDropdown").forEach((d) => {
-//       d.style.display = "none";
-//     });
-
-//     // toggle current one
-//     dropdown.style.display = isOpen ? "none" : "flex";
-//   }
-
-//   // close modal if clicking outside of it
-//   else if (!e.target.closest(".friendDropdown")) {
-//     document.querySelectorAll(".friendDropdown").forEach((d) => {
-//       d.style.display = "none";
-//     });
-//   } else if (!e.target.closest(".friendDropdown") && !e.target.closest(".nicknameModal")) {
-//     document.querySelectorAll(".friendDropdown").forEach((d) => {
-//       d.style.display = "none";
-//     });
-//   }
-// });
-
-// document.addEventListener("click", (e) => {
-//   // get the closest btn to the container
-//   const btn = e.target.closest(".moreOptions");
-
-//   if (btn) {
-//     // get the dropdown
-//     const dropdown = btn.closest(".moreOptionsContainer").querySelector(".friendDropdown");
-
-//     // open the modal
-//     const isOpen = dropdown.style.display === "flex";
-
-//     // close the modal for each other modals
-//     document.querySelectorAll(".friendDropdown").forEach((d) => {
-//       d.style.display = "none";
-//     });
-
-//     // toggle on/off
-//     dropdown.style.display = isOpen ? "none" : "flex";
-//     return;
-//   }
-
-//   // close only if clicking outside both modal and button
-//   if (!e.target.closest(".friendDropdown") && !e.target.closest(".nicknameModal")) {
-//     document.querySelectorAll(".friendDropdown").forEach((d) => {
-//       d.style.display = "none";
-//     });
-//   }
-// });
-
 document.addEventListener("click", (e) => {
   // get the closest btn
   const btn = e.target.closest(".moreOptions");
@@ -660,9 +568,6 @@ document.addEventListener("click", (e) => {
       const rect = btn.getBoundingClientRect();
       const dropdownHeight = dropdown.offsetHeight;
       const spaceBelow = window.innerHeight - rect.bottom;
-
-      // reset visibility
-      // dropdown.style.visibility = "visible";
 
       // depending on the position open modal top or bottom
       if (spaceBelow < dropdownHeight + 8) {
@@ -702,13 +607,6 @@ document.addEventListener("click", (e) => {
     modal.style.display = isOpen ? "none" : "flex";
     return;
   }
-
-  // close only if clicking outside both modal and button
-  // if (!e.target.closest(".nicknameModal") && !e.target.closest(".nicknameButton")) {
-  //   document.querySelectorAll(".nicknameModal").forEach((d) => {
-  //     d.style.display = "none";
-  //   });
-  // }
 });
 
 function handleCloseAllModals() {

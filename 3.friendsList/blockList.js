@@ -79,6 +79,9 @@ function handleRender(data) {
   });
   // insert the friendlist into the html friendsContainer
   blockContainer.innerHTML = friendList;
+
+  // show message when list gets empty
+  handleEmptyBlocklist(data);
 }
 
 // capitalize 1st letter

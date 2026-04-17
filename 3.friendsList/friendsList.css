@@ -28,10 +28,8 @@ body::before {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  width: 550px;
-  /* width: 900px; */
+  width: 900px;
   min-height: 100vh;
-  /* background: rgba(0, 0, 0, 0.7); */
   background: rgba(20, 13, 20, 0.9);
   border: 1px solid rgba(36, 27, 36);
   border-top: none;
@@ -43,7 +41,6 @@ body::before {
 .friendsContainer {
   display: flex;
   flex-direction: column;
-  /* gap: 8px; */
   background: transparent;
 }
 
@@ -56,7 +53,6 @@ body::before {
   width: 500px;
   background-color: rgba(19, 13, 19);
   border-radius: 8px;
-  /* border: 1px solid red; */
 }
 
 .imageContainer {
@@ -70,7 +66,6 @@ body::before {
 .friendCard .imageContainer img {
   border-radius: 50%;
   background-color: rgba(19, 13, 19);
-  /* background-color: blue; */
 }
 
 .nameContainer {
@@ -117,7 +112,6 @@ body::before {
 }
 
 .friendCard:hover .moreOptions {
-  /* visibility: visible; */
   display: block;
 }
 
@@ -145,7 +139,6 @@ body::before {
   cursor: pointer;
   position: absolute;
   right: 8px;
-  /* visibility: hidden; */
   display: none;
 }
 
@@ -159,7 +152,6 @@ body::before {
 }
 
 .friendDropdown {
-  /* visibility: hidden; */
   display: none;
   position: absolute;
   right: 0%;
@@ -167,7 +159,6 @@ body::before {
   flex-direction: column;
   z-index: 1;
   padding: 8px;
-  /* background: transparent !important; */
   background-color: rgba(43, 42, 43) !important;
   border-radius: 8px;
 }
@@ -351,8 +342,6 @@ hr {
 
 h1 {
   padding: 8px;
-  /* background: linear-gradient(90deg, #00c6ff 0%, #0072ff 25%, #6a00ff 70%, #6a00ff 100%); */
-  /* background: linear-gradient(90deg, #1fd6ff 0%, #1f85ff 25%, #7a1fff 65%, #7a1fff 100%); */
   background: linear-gradient(90deg, #33e6ff 0%, #3399ff 25%, #8a33ff 60%, #8a33ff 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -528,7 +517,7 @@ h1 {
   justify-content: center;
   align-items: center;
   gap: 16px;
-  width: 550px;
+  width: 900px;
   background: rgba(20, 13, 20, 0.9);
   border: 1px solid rgba(36, 27, 36);
   height: 100vh;
@@ -586,7 +575,6 @@ h1 {
   position: absolute;
   gap: 8px;
   right: 8px;
-  /* visibility: hidden; */
 }
 
 .blockContainer .friendCard .blocklistButtonContainer button {
@@ -613,7 +601,6 @@ h1 {
   transition: 0.2s;
 }
 
-/* Option 3 (recommended) */
 .blockContainer .friendCard .blocklistButtonContainer .removeButton:hover {
   background: rgba(220, 38, 38, 0.15) !important;
   color: rgb(239, 68, 68);
