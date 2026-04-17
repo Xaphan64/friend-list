@@ -2,7 +2,7 @@
 // go to folder where json is located with terminal and then npx json-server friends.json
 // (add --port 30XX if its not working) and CTRL + C to stop
 
-// `use strict`;
+`use strict`;
 
 // create a global friends variable
 let friends = [];
@@ -89,11 +89,6 @@ function handleFetchError(error) {
   }
 }
 
-function handleFilter(filteredData) {
-  // render only filtered data
-  handleRender(filteredData);
-}
-
 function handleRender(data) {
   // create an empty friend list
   let friendList = "";
@@ -155,6 +150,12 @@ function handleRender(data) {
       
     `;
   });
+
+  // in case list is empty and you add a new friend
+  console.log("RENDER CALLED", data.length);
+
+  friendsContainer.innerHTML = "";
+
   // insert the friendlist into the html friendsContainer
   friendsContainer.innerHTML = friendList;
 
@@ -162,9 +163,6 @@ function handleRender(data) {
   handleFriendsLenght(data);
 
   isFriends = true;
-
-  // show message when list gets empty
-  handleEmptyFriendslist(data);
 }
 
 function handleAllFriends() {
@@ -312,7 +310,7 @@ function handleSearchFriend() {
   // render by input field
   handleRender(filteredFriends);
 
-  // show text if friends is empty
+  // // show text if friends is empty
   handleEmptyText(filteredFriends);
 }
 
@@ -415,13 +413,18 @@ function handleAddFriend(e) {
     .then((response) => response.json())
     .then((friend) => {
       // add the friend to the json
+      console.log("before push", friends);
       friends.push(friend);
+      console.log("after push", friends);
 
       // re-render
+      handleUpdateUI();
       handleRender(friends);
 
       // close modal after adding a friend
       handleCloseAddFriendModal();
+
+      console.log(`test`);
     })
     // catch any error
     .catch((err) => console.error(err));
@@ -463,6 +466,7 @@ function handleDeleteFriend(id) {
 
       // re-render
       handleRender(friends);
+      handleUpdateUI();
     })
     // catch any error
     .catch((err) => console.error(err));
@@ -635,6 +639,21 @@ function handleCloseAddFriendModal() {
 function handleRedirectBlocklist() {
   // redirect to the blocked list
   window.location.href = "blockList.html";
+}
+
+function handleUpdateUI() {
+  if (friends.length === 0) {
+    appContainer.style.display = "none";
+    friendListEmptyContainer.style.display = "flex";
+  } else {
+    appContainer.style.display = "flex";
+    friendListEmptyContainer.style.display = "none";
+  }
+}
+
+function handleEmptyFriendslist(isEmpty) {
+  appContainer.style.display = isEmpty ? "none" : "flex";
+  friendListEmptyContainer.style.display = isEmpty ? "flex" : "none";
 }
 
 function handleEmptyFriendslist(friends) {
