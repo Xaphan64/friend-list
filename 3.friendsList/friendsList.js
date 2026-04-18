@@ -151,10 +151,10 @@ function handleRender(data) {
     `;
   });
 
-  // in case list is empty and you add a new friend
-  console.log("RENDER CALLED", data.length);
+  // // in case list is empty and you add a new friend
+  // console.log("RENDER CALLED", data.length);
 
-  friendsContainer.innerHTML = "";
+  // friendsContainer.innerHTML = "";
 
   // insert the friendlist into the html friendsContainer
   friendsContainer.innerHTML = friendList;
@@ -542,6 +542,7 @@ function handleBlockFriend(id) {
 
       // re-render
       handleRender(friends);
+      handleUpdateUI();
     })
     // catch any error
     .catch((err) => console.error(err));
