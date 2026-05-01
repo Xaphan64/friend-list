@@ -1,8 +1,8 @@
 `use strict`;
 
 // get json server address
-const urlBlocked = "http://localhost:3000/blocked";
-const urlFriends = "http://localhost:3000/friends";
+const urlBlocked = "https://blog-data-9hab.onrender.com/blocked";
+const urlFriends = "https://blog-data-9hab.onrender.com/friends";
 
 // get elements
 const blockContainer = document.querySelector(".blockContainer");

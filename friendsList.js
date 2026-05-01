@@ -19,8 +19,8 @@ let isFriends = true;
 const filters = {};
 
 // get json server address
-const urlFriends = "http://localhost:3000/friends";
-const urlBlocked = "http://localhost:3000/blocked";
+const urlFriends = "https://blog-data-9hab.onrender.com/friends";
+const urlBlocked = "https://blog-data-9hab.onrender.com/blocked";
 
 // get elements
 const appContainer = document.querySelector(".friendAppContainer");
@@ -150,11 +150,6 @@ function handleRender(data) {
       
     `;
   });
-
-  // // in case list is empty and you add a new friend
-  // console.log("RENDER CALLED", data.length);
-
-  // friendsContainer.innerHTML = "";
 
   // insert the friendlist into the html friendsContainer
   friendsContainer.innerHTML = friendList;
