@@ -9,21 +9,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   </head>
   <body>
-    <section class="friendAppContainer">
+    <!-- <section> -->
+    <div class="friendAppContainer">
       <h1>Block List</h1>
 
       <button type="button" class="blocklistButton" onclick="handleRedirectBlocklist()">Friend list</button>
 
       <div class="blockContainer"></div>
-
-      <div class="errorContainer"></div>
-    </section>
+    </div>
+    <div class="errorContainer"></div>
 
     <div class="blocklistEmptyContainer">
       <h3 class="blocklistEmpty">Your block list is empty. This could be a good thing!</h3>
 
       <button type="button" class="blocklistButton" onclick="handleRedirectBlocklist()">Back</button>
     </div>
+    <!-- </section> -->
+
+    <div id="loader" class="spinner"></div>
 
     <script src="blockList.js"></script>
   </body>

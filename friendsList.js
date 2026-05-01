@@ -4,6 +4,13 @@
 
 `use strict`;
 
+// import { createClient } from "@supabase/supabase-js";
+
+// const supabase = window.supabase.createClient(
+//   "https://cxnxfsgvlwualxhnsebq.supabase.co/rest/v1/",
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bnhmc2d2bHd1YWx4aG5zZWJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2MzM3ODIsImV4cCI6MjA5MzIwOTc4Mn0.DGdowU-_9o1cAzgtAGeF3yycJPw8eV-l0SsE7-_5Qqg",
+// );
+
 // create a global friends variable
 let friends = [];
 let blocked = [];
@@ -48,9 +55,16 @@ const friendsIcon = document.querySelector(".friendsIcon");
 const friendListEmptyContainer = document.querySelector(".friendlistEmptyContainer");
 const filterButtons = document.querySelectorAll(".filterButtonContainer button");
 const sortButtons = document.querySelectorAll(".sortButtonContainer button");
+const spinner = document.getElementById("loader");
 
 // fetch the data on page load
 window.addEventListener("DOMContentLoaded", () => {
+  // show spinner before fetching
+  spinner.style.display = "block";
+
+  // supabase
+  //   .from("friends")
+  //   .select("*")
   fetch(urlFriends)
     .then((response) => {
       // throw error is response is not ok
@@ -70,11 +84,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
       // if friends is empty
       handleEmptyFriendslist(friends);
+
+      // show elements after fetch
+      appContainer.style.visibility = "visible";
+      friendListEmptyContainer.style.visibility = "visible";
     })
     .catch((error) => {
       // show error in console and in html
       console.error("Failed to fetch data:", error);
       handleFetchError(error);
+    })
+    .finally(() => {
+      // remove spinner after load
+      spinner.style.display = "none";
     });
 });
 

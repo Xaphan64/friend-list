@@ -23,8 +23,10 @@ body::before {
   z-index: -1;
 }
 
-.friendAppContainer {
+.friendAppContainer,
+.blockAppContainer {
   display: flex;
+  visibility: hidden;
   flex-direction: column;
   align-items: center;
   gap: 8px;
@@ -275,6 +277,10 @@ hr {
   justify-content: flex-end;
 }
 
+.friendlistEmptyContainer {
+  visibility: hidden;
+}
+
 .addFriendButtonContainer .addFriendButton,
 .nicknamModalButtonContainer .nicknameEditButton,
 .friendlistEmptyContainer .addFriend {
@@ -331,9 +337,10 @@ hr {
 }
 
 .errorContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
   background: transparent;
 }
 
@@ -525,9 +532,34 @@ h1 {
   font-size: 20px;
 }
 
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: none;
+  margin: 40px auto;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* BLOCKLIST */
 .blocklistEmptyContainer {
   display: flex;
+  visibility: hidden;
   flex-direction: column;
   justify-content: center;
   align-items: center;

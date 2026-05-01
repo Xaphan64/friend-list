@@ -3,12 +3,19 @@
 // get json server address
 const urlBlocked = "https://blog-data-9hab.onrender.com/blocked";
 const urlFriends = "https://blog-data-9hab.onrender.com/friends";
+// debugger;
 
 // get elements
 const blockContainer = document.querySelector(".blockContainer");
+const blocklistEmptyContainer = document.querySelector(".blocklistEmptyContainer");
+const friendAppContainer = document.querySelector(".friendAppContainer");
+const spinner = document.getElementById("loader");
 
 // fetch the data on page load
 window.addEventListener("DOMContentLoaded", () => {
+  // show spinner before fetching
+  spinner.style.display = "block";
+
   fetch(urlBlocked)
     .then((response) => {
       // throw error is response is not ok
@@ -25,13 +32,20 @@ window.addEventListener("DOMContentLoaded", () => {
 
       // render initial friends list
       handleRender(friends);
-
       handleEmptyBlocklist(friends);
+
+      // show elements after fetch
+      friendAppContainer.style.visibility = "visible";
+      blocklistEmptyContainer.style.visibility = "visible";
     })
     .catch((error) => {
       // show error in console and in html
       console.error("Failed to fetch data:", error);
       handleFetchError(error);
+    })
+    .finally(() => {
+      // remove spinner after load
+      spinner.style.display = "none";
     });
 });
 
@@ -40,7 +54,7 @@ function handleFetchError(error) {
     // if there is an error don't show error and don't show friends page
     document.querySelector(".errorContainer").innerHTML =
       `<p class="error">Error loading data: ${error.message}</p>`;
-    document.querySelector(".friendAppContainer").style.display = "none";
+    friendAppContainer.style.display = "none";
   }
 }
 
@@ -141,15 +155,15 @@ function handleUnblockFriend(id) {
 
 function handleRedirectBlocklist() {
   // redirect to the blocked list
-  window.location.href = "friendsList.html";
+  window.location.href = "index.html";
 }
 
 function handleEmptyBlocklist(friends) {
   if (friends.length === 0) {
-    document.querySelector(".friendAppContainer").style.display = "none";
-    document.querySelector(".blocklistEmptyContainer").style.display = "flex";
+    friendAppContainer.style.display = "none";
+    blocklistEmptyContainer.style.display = "flex";
   } else {
-    document.querySelector(".friendAppContainer").style.display = "flex";
-    document.querySelector(".blocklistEmptyContainer").style.display = "none";
+    friendAppContainer.style.display = "flex";
+    blocklistEmptyContainer.style.display = "none";
   }
 }
