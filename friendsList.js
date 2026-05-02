@@ -4,12 +4,19 @@
 
 `use strict`;
 
-// import { createClient } from "@supabase/supabase-js";
+const supabaseUrl = "https://eqbdezmqcnskzrzwurid.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxYmRlem1xY25za3pyend1cmlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3MDU0OTQsImV4cCI6MjA5MzI4MTQ5NH0.JUTg5oUbCE1XOwRGQzBdc5bYxoUUmBs0Zs3se9AJ9ac";
 
-// const supabase = window.supabase.createClient(
-//   "https://cxnxfsgvlwualxhnsebq.supabase.co/rest/v1/",
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bnhmc2d2bHd1YWx4aG5zZWJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2MzM3ODIsImV4cCI6MjA5MzIwOTc4Mn0.DGdowU-_9o1cAzgtAGeF3yycJPw8eV-l0SsE7-_5Qqg",
-// );
+const dbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+async function loadFriends() {
+  const { data, error } = await dbClient.from("friends").select("*");
+
+  console.log(data, error);
+}
+
+loadFriends();
 
 // create a global friends variable
 let friends = [];
@@ -22,12 +29,9 @@ let isAge;
 let isOnline = false;
 let isFriends = true;
 
-// create a global filters
-const filters = {};
-
 // get json server address
-const urlFriends = "https://blog-data-9hab.onrender.com/friends";
-const urlBlocked = "https://blog-data-9hab.onrender.com/blocked";
+const urlFriends = "http://localhost:3000/friends";
+const urlBlocked = "http://localhost:3000/blocked";
 
 // get elements
 const appContainer = document.querySelector(".friendAppContainer");
@@ -57,47 +61,78 @@ const filterButtons = document.querySelectorAll(".filterButtonContainer button")
 const sortButtons = document.querySelectorAll(".sortButtonContainer button");
 const spinner = document.getElementById("loader");
 
+// // fetch the data on page load
+// window.addEventListener("DOMContentLoaded", () => {
+//   // show spinner before fetching
+//   spinner.style.display = "block";
+
+//   fetch(urlFriends)
+//     .then((response) => {
+//       // throw error is response is not ok
+//       if (!response.ok) {
+//         throw new Error(`HTTP Error! Status: ${response.status}`);
+//       }
+//       return response.json();
+//     })
+
+//     // the data if response is ok
+//     .then((data) => {
+//       // all friends
+//       friends = data;
+
+//       // render initial friends list
+//       handleRender(friends);
+
+//       // if friends is empty
+//       handleEmptyFriendslist(friends);
+
+//       // show elements after fetch
+//       appContainer.style.visibility = "visible";
+//       friendListEmptyContainer.style.visibility = "visible";
+//     })
+//     .catch((error) => {
+//       // show error in console and in html
+//       console.error("Failed to fetch data:", error);
+//       handleFetchError(error);
+//     })
+//     .finally(() => {
+//       // remove spinner after load
+//       spinner.style.display = "none";
+//     });
+// });
+
 // fetch the data on page load
-window.addEventListener("DOMContentLoaded", () => {
-  // show spinner before fetching
+async function loadFriends() {
+  try {
+    const { data, error } = await dbClient.from("friends").select("*");
+
+    if (error) {
+      throw error;
+    }
+
+    friends = data;
+
+    // render initial friends list
+    handleRender(friends);
+    handleEmptyFriendslist(friends);
+
+    // show elements after fetch
+    appContainer.style.visibility = "visible";
+    friendListEmptyContainer.style.visibility = "visible";
+  } catch (error) {
+    // show error in console and in html
+    console.error("Failed to fetch data:", error);
+    handleFetchError(error);
+  } finally {
+    // remove spinner after load
+    spinner.style.display = "none";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // show spinner before initializing
   spinner.style.display = "block";
-
-  // supabase
-  //   .from("friends")
-  //   .select("*")
-  fetch(urlFriends)
-    .then((response) => {
-      // throw error is response is not ok
-      if (!response.ok) {
-        throw new Error(`HTTP Error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-
-    // the data if response is ok
-    .then((data) => {
-      // all friends
-      friends = data;
-
-      // render initial friends list
-      handleRender(friends);
-
-      // if friends is empty
-      handleEmptyFriendslist(friends);
-
-      // show elements after fetch
-      appContainer.style.visibility = "visible";
-      friendListEmptyContainer.style.visibility = "visible";
-    })
-    .catch((error) => {
-      // show error in console and in html
-      console.error("Failed to fetch data:", error);
-      handleFetchError(error);
-    })
-    .finally(() => {
-      // remove spinner after load
-      spinner.style.display = "none";
-    });
+  loadFriends();
 });
 
 function handleFetchError(error) {
@@ -121,7 +156,7 @@ function handleRender(data) {
     friendList += `
       <div class="friendCard">
         <div class="imageContainer">
-            <img src="${`${friend.icon}${friend.name}`}" alt="${friend.name}" style="background-color: ${friend.bgColor}" />
+            <img src="${`${friend.icon}${friend.name}`}" alt="${friend.name}" style="background-color: ${friend.bg_color}" />
             <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
               <circle r="10" cx="10" cy="10" fill="${handleDotColor(friend.status)}" />
             </svg>
@@ -135,7 +170,7 @@ function handleRender(data) {
 
             <div class="friendStatus">${handleCapitalize(friend.status)}</div>
 
-            <div class="friendDate">${friend.birthDate}</div>
+            <div class="friendDate">${friend.birth_date}</div>
         </div>
         
         <div class="moreOptionsContainer">
@@ -275,11 +310,11 @@ function handleFilterAge() {
 
   // sort by age ↑ or ↓
   const sortedByAge = [...friends].sort((a, b) =>
-    isAge ? new Date(a.birthDate) - new Date(b.birthDate) : new Date(b.birthDate) - new Date(a.birthDate),
+    isAge ? new Date(a.birth_date) - new Date(b.birth_date) : new Date(b.birth_date) - new Date(a.birth_date),
   );
 
   const sortedByAgeOnline = [...onlineFriends].sort((a, b) =>
-    isAge ? new Date(a.birthDate) - new Date(b.birthDate) : new Date(b.birthDate) - new Date(a.birthDate),
+    isAge ? new Date(a.birth_date) - new Date(b.birth_date) : new Date(b.birth_date) - new Date(a.birth_date),
   );
 
   // change button content
@@ -415,8 +450,8 @@ function handleAddFriend(e) {
     icon: `https://api.dicebear.com/9.x/avataaars/svg?seed=${Date.now()}`,
     status: handleRandomStatus(status),
     nickname: "",
-    bgColor: handleRandomBgColor(),
-    birthDate: handleRandomDate(new Date(1960, 1, 1), new Date(2019, 1, 1))
+    bg_color: handleRandomBgColor(),
+    birth_date: handleRandomDate(new Date(1960, 1, 1), new Date(2019, 1, 1))
       .toISOString()
       .slice(0, 10),
   };
@@ -430,9 +465,7 @@ function handleAddFriend(e) {
     .then((response) => response.json())
     .then((friend) => {
       // add the friend to the json
-      console.log("before push", friends);
       friends.push(friend);
-      console.log("after push", friends);
 
       // re-render
       handleUpdateUI();
@@ -440,8 +473,6 @@ function handleAddFriend(e) {
 
       // close modal after adding a friend
       handleCloseAddFriendModal();
-
-      console.log(`test`);
     })
     // catch any error
     .catch((err) => console.error(err));

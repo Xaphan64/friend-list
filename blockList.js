@@ -1,8 +1,8 @@
 `use strict`;
 
 // get json server address
-const urlBlocked = "https://blog-data-9hab.onrender.com/blocked";
-const urlFriends = "https://blog-data-9hab.onrender.com/friends";
+const urlBlocked = "http://localhost:3000/blocked";
+const urlFriends = "http://localhost:3000/friends";
 // debugger;
 
 // get elements
@@ -68,7 +68,7 @@ function handleRender(data) {
     friendList += `
     <div class="friendCard">
       <div class="imageContainer">
-        <img src="${`${friend.icon}${friend.name}`}" alt="${friend.name}" style="background-color: ${friend.bgColor}" />
+        <img src="${`${friend.icon}${friend.name}`}" alt="${friend.name}" style="background-color: ${friend.bg_color}" />
         <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
           <circle r="10" cx="10" cy="10" fill="#a8a8a8" />
         </svg>
