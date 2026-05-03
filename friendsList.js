@@ -104,12 +104,15 @@ const spinner = document.getElementById("loader");
 // fetch the data on page load
 async function loadFriends() {
   try {
+    // get data and error from supabase
     const { data, error } = await dbClient.from("friends").select("*");
 
+    // show error
     if (error) {
       throw error;
     }
 
+    // define data
     friends = data;
 
     // render initial friends list
@@ -131,7 +134,7 @@ async function loadFriends() {
 
 document.addEventListener("DOMContentLoaded", () => {
   // show spinner before initializing
-  spinner.style.display = "block";
+  // spinner.style.display = "block";
   loadFriends();
 });
 
@@ -140,7 +143,8 @@ function handleFetchError(error) {
     // if there is an error don't show error and don't show friends page
     document.querySelector(".errorContainer").innerHTML =
       `<p class="error">Error loading data: ${error.message}</p>`;
-    // don't show other elements
+
+    // don't show other elements if error appears
     appContainer.style.display = "none";
     friendListEmptyContainer.style.display = "none";
   }
@@ -431,21 +435,68 @@ function handleCapitalize(text) {
     .join(" ");
 }
 
-function handleAddFriend(e) {
+// function handleAddFriend(e) {
+//   e.preventDefault();
+
+//   // get statuses
+//   const status = ["online", "online", "online", "online", "away", "away", "busy", "offline"];
+
+//   // don't add if input is empty
+//   if (addFriendInput.value === "") {
+//     alert("You must type a name!");
+//     return;
+//   }
+
+//   // create a new friend object
+//   const newFriend = {
+//     id: Date.now(),
+//     name: addFriendInput.value,
+//     icon: `https://api.dicebear.com/9.x/avataaars/svg?seed=${Date.now()}`,
+//     status: handleRandomStatus(status),
+//     nickname: "",
+//     bg_color: handleRandomBgColor(),
+//     birth_date: handleRandomDate(new Date(1960, 1, 1), new Date(2019, 1, 1))
+//       .toISOString()
+//       .slice(0, 10),
+//   };
+//   fetch(urlFriends, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(newFriend),
+//   })
+//     .then((response) => response.json())
+//     .then((friend) => {
+//       // add the friend to the json
+//       friends.push(friend);
+
+//       // re-render
+//       handleUpdateUI();
+//       handleRender(friends);
+
+//       // close modal after adding a friend
+//       handleCloseAddFriendModal();
+//     })
+//     // catch any error
+//     .catch((err) => console.error(err));
+// }
+
+async function handleAddFriend(e) {
   e.preventDefault();
 
   // get statuses
   const status = ["online", "online", "online", "online", "away", "away", "busy", "offline"];
 
   // don't add if input is empty
-  if (addFriendInput.value === "") {
+  if (addFriendInput.value.trim() === "") {
     alert("You must type a name!");
     return;
   }
 
   // create a new friend object
   const newFriend = {
-    id: Date.now(),
+    id: Date.now().toString(), // text id in Supabase
     name: addFriendInput.value,
     icon: `https://api.dicebear.com/9.x/avataaars/svg?seed=${Date.now()}`,
     status: handleRandomStatus(status),
@@ -455,27 +506,29 @@ function handleAddFriend(e) {
       .toISOString()
       .slice(0, 10),
   };
-  fetch(urlFriends, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newFriend),
-  })
-    .then((response) => response.json())
-    .then((friend) => {
-      // add the friend to the json
-      friends.push(friend);
 
-      // re-render
-      handleUpdateUI();
-      handleRender(friends);
+  try {
+    const { data, error } = await dbClient.from("friends").insert([newFriend]).select();
 
-      // close modal after adding a friend
-      handleCloseAddFriendModal();
-    })
-    // catch any error
-    .catch((err) => console.error(err));
+    if (error) {
+      throw error;
+    }
+
+    // inserted row returned from Supabase
+    const friend = data[0];
+
+    // add to local array
+    friends.push(friend);
+
+    // re-render
+    handleUpdateUI();
+    handleRender(friends);
+
+    // close modal
+    handleCloseAddFriendModal();
+  } catch (err) {
+    console.error("Failed to add friend:", err);
+  }
 }
 
 // generate a random date between 2 parameters
