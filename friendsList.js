@@ -132,6 +132,7 @@ async function loadFriends() {
   }
 }
 
+console.log(`test`);
 document.addEventListener("DOMContentLoaded", () => {
   // show spinner before initializing
   // spinner.style.display = "block";
