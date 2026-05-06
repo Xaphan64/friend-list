@@ -132,7 +132,6 @@ async function loadFriends() {
   }
 }
 
-console.log(`test`);
 document.addEventListener("DOMContentLoaded", () => {
   // show spinner before initializing
   // spinner.style.display = "block";
@@ -556,22 +555,41 @@ function handleRandomBgColor() {
   return hexValue;
 }
 
-function handleDeleteFriend(id) {
-  // fetch the id from the json server and delete
-  fetch(`${urlFriends}/${id}`, {
-    method: "DELETE",
-  })
-    .then((response) => response.json())
-    .then(() => {
-      // remove from json
-      friends = friends.filter((friend) => friend.id !== id);
+// function handleDeleteFriend(id) {
+//   // fetch the id from the json server and delete
+//   fetch(`${urlFriends}/${id}`, {
+//     method: "DELETE",
+//   })
+//     .then((response) => response.json())
+//     .then(() => {
+//       // remove from json
+//       friends = friends.filter((friend) => friend.id !== id);
 
-      // re-render
-      handleRender(friends);
-      handleUpdateUI();
-    })
-    // catch any error
-    .catch((err) => console.error(err));
+//       // re-render
+//       handleRender(friends);
+//       handleUpdateUI();
+//     })
+//     // catch any error
+//     .catch((err) => console.error(err));
+// }
+
+async function handleDeleteFriend(id) {
+  try {
+    const { error } = await dbClient.from("friends").delete().eq("id", id);
+
+    if (error) {
+      throw error;
+    }
+
+    // remove locally
+    friends = friends.filter((friend) => friend.id !== id);
+
+    // re-render
+    handleRender(friends);
+    handleUpdateUI();
+  } catch (err) {
+    console.error("Failed to delete friend:", err);
+  }
 }
 
 function handleClickNickname(id, el) {
@@ -588,66 +606,131 @@ function handleClickNickname(id, el) {
   input.value = clickedFriend.nickname || "";
 }
 
-function handleSubmitNickname(id, el) {
+// function handleSubmitNickname(id, el) {
+//   // find the correct modal
+//   const modal = el.closest(".nicknameModal");
+
+//   // find input inside THIS modal
+//   const input = modal.querySelector(".friendNickname");
+
+//   // update the nickname with value in input
+//   const friendNickname = {
+//     nickname: input.value,
+//   };
+
+//   fetch(`${urlFriends}/${id}`, {
+//     method: "PATCH",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(friendNickname),
+//   })
+//     .then((response) => response.json())
+//     .then((updatedFriend) => {
+//       // add the friend to the json
+//       friends = friends.map((friend) => (friend.id === id ? updatedFriend : friend));
+
+//       // re-render
+//       handleRender(friends);
+//     })
+//     // catch any error
+//     .catch((err) => console.error(err));
+// }
+
+async function handleSubmitNickname(id, el) {
   // find the correct modal
   const modal = el.closest(".nicknameModal");
 
   // find input inside THIS modal
   const input = modal.querySelector(".friendNickname");
 
-  // update the nickname with value in input
+  // update nickname object
   const friendNickname = {
     nickname: input.value,
   };
 
-  fetch(`${urlFriends}/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(friendNickname),
-  })
-    .then((response) => response.json())
-    .then((updatedFriend) => {
-      // add the friend to the json
-      friends = friends.map((friend) => (friend.id === id ? updatedFriend : friend));
+  try {
+    // send data to supabase
+    const { data, error } = await dbClient.from("friends").update(friendNickname).eq("id", id).select();
 
-      // re-render
-      handleRender(friends);
-    })
-    // catch any error
-    .catch((err) => console.error(err));
+    if (error) {
+      throw error;
+    }
+
+    const updatedFriend = data[0];
+
+    // update local array
+    friends = friends.map((friend) => (friend.id === id ? updatedFriend : friend));
+
+    // re-render
+    handleRender(friends);
+  } catch (err) {
+    console.error("Failed to update nickname:", err);
+  }
 }
 
-function handleBlockFriend(id) {
+// function handleBlockFriend(id) {
+//   // get friend data
+//   const friendBlocked = friends.find((friend) => friend.id === id);
+
+//   // don't do anything to other friends
+//   if (!friendBlocked) return;
+
+//   // add friend to blocked list
+//   fetch(urlBlocked, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(friendBlocked),
+//   })
+//     .then((response) => response.json())
+//     // delete friend from the friends list
+//     .then(() => {
+//       return fetch(`${urlFriends}/${id}`, { method: "DELETE" });
+//     })
+//     .then(() => {
+//       friends = friends.filter((friend) => friend.id !== id);
+
+//       // re-render
+//       handleRender(friends);
+//       handleUpdateUI();
+//     })
+//     // catch any error
+//     .catch((err) => console.error(err));
+// }
+
+async function handleBlockFriend(id) {
   // get friend data
   const friendBlocked = friends.find((friend) => friend.id === id);
 
-  // don't do anything to other friends
   if (!friendBlocked) return;
 
-  // add friend to blocked list
-  fetch(urlBlocked, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(friendBlocked),
-  })
-    .then((response) => response.json())
-    // delete friend from the friends list
-    .then(() => {
-      return fetch(`${urlFriends}/${id}`, { method: "DELETE" });
-    })
-    .then(() => {
-      friends = friends.filter((friend) => friend.id !== id);
+  try {
+    // insert into blocked table
+    const { error: insertError } = await dbClient.from("blocked").insert([friendBlocked]);
 
-      // re-render
-      handleRender(friends);
-      handleUpdateUI();
-    })
+    if (insertError) {
+      throw insertError;
+    }
+
+    // remove from friends table
+    const { error: deleteError } = await dbClient.from("friends").delete().eq("id", id);
+
+    if (deleteError) {
+      throw deleteError;
+    }
+
+    // update local array
+    friends = friends.filter((friend) => friend.id !== id);
+
+    // re-render
+    handleRender(friends);
+    handleUpdateUI();
     // catch any error
-    .catch((err) => console.error(err));
+  } catch (err) {
+    console.error("Failed to block friend:", err);
+  }
 }
 
 document.addEventListener("click", (e) => {
