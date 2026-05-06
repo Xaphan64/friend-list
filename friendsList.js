@@ -1,5 +1,5 @@
 // python3 -m http.server 5500 - to start server if live server is behaving
-// go to folder where json is located with terminal and then npx json-server friends.json
+// go to folder where json is located with terminal and then npx json-server friends.json - deprecated, migrated to supabase
 // (add --port 30XX if its not working) and CTRL + C to stop
 
 `use strict`;
@@ -9,18 +9,6 @@ const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxYmRlem1xY25za3pyend1cmlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3MDU0OTQsImV4cCI6MjA5MzI4MTQ5NH0.JUTg5oUbCE1XOwRGQzBdc5bYxoUUmBs0Zs3se9AJ9ac";
 
 const dbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-async function loadFriends() {
-  const { data, error } = await dbClient.from("friends").select("*");
-
-  console.log(data, error);
-}
-
-loadFriends();
-
-// create a global friends variable
-let friends = [];
-let blocked = [];
 
 // create global status
 let friendDropdownModal = false;
@@ -61,47 +49,15 @@ const filterButtons = document.querySelectorAll(".filterButtonContainer button")
 const sortButtons = document.querySelectorAll(".sortButtonContainer button");
 const spinner = document.getElementById("loader");
 
-// // fetch the data on page load
-// window.addEventListener("DOMContentLoaded", () => {
-//   // show spinner before fetching
-//   spinner.style.display = "block";
-
-//   fetch(urlFriends)
-//     .then((response) => {
-//       // throw error is response is not ok
-//       if (!response.ok) {
-//         throw new Error(`HTTP Error! Status: ${response.status}`);
-//       }
-//       return response.json();
-//     })
-
-//     // the data if response is ok
-//     .then((data) => {
-//       // all friends
-//       friends = data;
-
-//       // render initial friends list
-//       handleRender(friends);
-
-//       // if friends is empty
-//       handleEmptyFriendslist(friends);
-
-//       // show elements after fetch
-//       appContainer.style.visibility = "visible";
-//       friendListEmptyContainer.style.visibility = "visible";
-//     })
-//     .catch((error) => {
-//       // show error in console and in html
-//       console.error("Failed to fetch data:", error);
-//       handleFetchError(error);
-//     })
-//     .finally(() => {
-//       // remove spinner after load
-//       spinner.style.display = "none";
-//     });
-// });
-
 // fetch the data on page load
+document.addEventListener("DOMContentLoaded", () => {
+  // show spinner before initializing
+  spinner.style.display = "block";
+
+  // run init function
+  loadFriends();
+});
+
 async function loadFriends() {
   try {
     // get data and error from supabase
@@ -131,12 +87,6 @@ async function loadFriends() {
     spinner.style.display = "none";
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  // show spinner before initializing
-  // spinner.style.display = "block";
-  loadFriends();
-});
 
 function handleFetchError(error) {
   if (error) {
@@ -435,53 +385,6 @@ function handleCapitalize(text) {
     .join(" ");
 }
 
-// function handleAddFriend(e) {
-//   e.preventDefault();
-
-//   // get statuses
-//   const status = ["online", "online", "online", "online", "away", "away", "busy", "offline"];
-
-//   // don't add if input is empty
-//   if (addFriendInput.value === "") {
-//     alert("You must type a name!");
-//     return;
-//   }
-
-//   // create a new friend object
-//   const newFriend = {
-//     id: Date.now(),
-//     name: addFriendInput.value,
-//     icon: `https://api.dicebear.com/9.x/avataaars/svg?seed=${Date.now()}`,
-//     status: handleRandomStatus(status),
-//     nickname: "",
-//     bg_color: handleRandomBgColor(),
-//     birth_date: handleRandomDate(new Date(1960, 1, 1), new Date(2019, 1, 1))
-//       .toISOString()
-//       .slice(0, 10),
-//   };
-//   fetch(urlFriends, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(newFriend),
-//   })
-//     .then((response) => response.json())
-//     .then((friend) => {
-//       // add the friend to the json
-//       friends.push(friend);
-
-//       // re-render
-//       handleUpdateUI();
-//       handleRender(friends);
-
-//       // close modal after adding a friend
-//       handleCloseAddFriendModal();
-//     })
-//     // catch any error
-//     .catch((err) => console.error(err));
-// }
-
 async function handleAddFriend(e) {
   e.preventDefault();
 
@@ -555,26 +458,9 @@ function handleRandomBgColor() {
   return hexValue;
 }
 
-// function handleDeleteFriend(id) {
-//   // fetch the id from the json server and delete
-//   fetch(`${urlFriends}/${id}`, {
-//     method: "DELETE",
-//   })
-//     .then((response) => response.json())
-//     .then(() => {
-//       // remove from json
-//       friends = friends.filter((friend) => friend.id !== id);
-
-//       // re-render
-//       handleRender(friends);
-//       handleUpdateUI();
-//     })
-//     // catch any error
-//     .catch((err) => console.error(err));
-// }
-
 async function handleDeleteFriend(id) {
   try {
+    // get data from supabase and delete by id
     const { error } = await dbClient.from("friends").delete().eq("id", id);
 
     if (error) {
@@ -605,37 +491,6 @@ function handleClickNickname(id, el) {
   // set value
   input.value = clickedFriend.nickname || "";
 }
-
-// function handleSubmitNickname(id, el) {
-//   // find the correct modal
-//   const modal = el.closest(".nicknameModal");
-
-//   // find input inside THIS modal
-//   const input = modal.querySelector(".friendNickname");
-
-//   // update the nickname with value in input
-//   const friendNickname = {
-//     nickname: input.value,
-//   };
-
-//   fetch(`${urlFriends}/${id}`, {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(friendNickname),
-//   })
-//     .then((response) => response.json())
-//     .then((updatedFriend) => {
-//       // add the friend to the json
-//       friends = friends.map((friend) => (friend.id === id ? updatedFriend : friend));
-
-//       // re-render
-//       handleRender(friends);
-//     })
-//     // catch any error
-//     .catch((err) => console.error(err));
-// }
 
 async function handleSubmitNickname(id, el) {
   // find the correct modal
@@ -668,37 +523,6 @@ async function handleSubmitNickname(id, el) {
     console.error("Failed to update nickname:", err);
   }
 }
-
-// function handleBlockFriend(id) {
-//   // get friend data
-//   const friendBlocked = friends.find((friend) => friend.id === id);
-
-//   // don't do anything to other friends
-//   if (!friendBlocked) return;
-
-//   // add friend to blocked list
-//   fetch(urlBlocked, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(friendBlocked),
-//   })
-//     .then((response) => response.json())
-//     // delete friend from the friends list
-//     .then(() => {
-//       return fetch(`${urlFriends}/${id}`, { method: "DELETE" });
-//     })
-//     .then(() => {
-//       friends = friends.filter((friend) => friend.id !== id);
-
-//       // re-render
-//       handleRender(friends);
-//       handleUpdateUI();
-//     })
-//     // catch any error
-//     .catch((err) => console.error(err));
-// }
 
 async function handleBlockFriend(id) {
   // get friend data

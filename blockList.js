@@ -5,49 +5,55 @@ const urlBlocked = "http://localhost:3000/blocked";
 const urlFriends = "http://localhost:3000/friends";
 // debugger;
 
+const supabaseUrl = "https://eqbdezmqcnskzrzwurid.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxYmRlem1xY25za3pyend1cmlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3MDU0OTQsImV4cCI6MjA5MzI4MTQ5NH0.JUTg5oUbCE1XOwRGQzBdc5bYxoUUmBs0Zs3se9AJ9ac";
+
+const dbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
 // get elements
 const blockContainer = document.querySelector(".blockContainer");
 const blocklistEmptyContainer = document.querySelector(".blocklistEmptyContainer");
 const friendAppContainer = document.querySelector(".friendAppContainer");
 const spinner = document.getElementById("loader");
 
-// fetch the data on page load
-window.addEventListener("DOMContentLoaded", () => {
-  // show spinner before fetching
+document.addEventListener("DOMContentLoaded", () => {
+  // show spinner before initializing
   spinner.style.display = "block";
 
-  fetch(urlBlocked)
-    .then((response) => {
-      // throw error is response is not ok
-      if (!response.ok) {
-        throw new Error(`HTTP Error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-
-    // the data if response is ok
-    .then((data) => {
-      // all friends
-      friends = data;
-
-      // render initial friends list
-      handleRender(friends);
-      handleEmptyBlocklist(friends);
-
-      // show elements after fetch
-      friendAppContainer.style.visibility = "visible";
-      blocklistEmptyContainer.style.visibility = "visible";
-    })
-    .catch((error) => {
-      // show error in console and in html
-      console.error("Failed to fetch data:", error);
-      handleFetchError(error);
-    })
-    .finally(() => {
-      // remove spinner after load
-      spinner.style.display = "none";
-    });
+  // run init function
+  loadFriends();
 });
+
+async function loadFriends() {
+  try {
+    // get data and error from supabase
+    const { data, error } = await dbClient.from("blocked").select("*");
+
+    // show error
+    if (error) {
+      throw error;
+    }
+
+    // define data
+    friends = data;
+
+    // render initial friends list
+    handleRender(friends);
+    handleEmptyBlocklist(friends);
+
+    // show elements after fetch
+    friendAppContainer.style.visibility = "visible";
+    blocklistEmptyContainer.style.visibility = "visible";
+  } catch (error) {
+    // show error in console and in html
+    console.error("Failed to fetch data:", error);
+    handleFetchError(error);
+  } finally {
+    // remove spinner after load
+    spinner.style.display = "none";
+  }
+}
 
 function handleFetchError(error) {
   if (error) {
@@ -106,51 +112,55 @@ function handleCapitalize(text) {
     .join(" ");
 }
 
-function handleDeleteFriend(id) {
-  // fetch the id from the json server and delete
-  fetch(`${urlBlocked}/${id}`, {
-    method: "DELETE",
-  })
-    .then((response) => response.json())
-    .then(() => {
-      // remove from json
-      friends = friends.filter((friend) => friend.id !== id);
+async function handleDeleteFriend(id) {
+  try {
+    // get data from supabase and delete by id
+    const { error } = await dbClient.from("blocked").delete().eq("id", id);
 
-      // re-render
-      handleRender(friends);
-    })
-    // catch any error
-    .catch((err) => console.error(err));
+    if (error) {
+      throw error;
+    }
+
+    // remove locally
+    friends = friends.filter((friend) => friend.id !== id);
+
+    // re-render
+    handleRender(friends);
+  } catch (err) {
+    console.error("Failed to delete friend:", err);
+  }
 }
 
-function handleUnblockFriend(id) {
-  // get friend data
+async function handleUnblockFriend(id) {
+  // get blocked friend data from current array
   const friendBlocked = friends.find((friend) => friend.id === id);
 
-  // don't do anything to other friends
+  // stop if not found
   if (!friendBlocked) return;
 
-  // add friend to blocked list
-  fetch(urlFriends, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(friendBlocked),
-  })
-    .then((response) => response.json())
-    // delete friend from the friends list
-    .then(() => {
-      return fetch(`${urlBlocked}/${id}`, { method: "DELETE" });
-    })
-    .then(() => {
-      friends = friends.filter((friend) => friend.id !== id);
+  try {
+    // move back to friends table
+    const { error: insertError } = await dbClient.from("friends").insert([friendBlocked]);
 
-      // re-render
-      handleRender(friends);
-    })
-    // catch any error
-    .catch((err) => console.error(err));
+    if (insertError) {
+      throw insertError;
+    }
+
+    // remove from blocked table
+    const { error: deleteError } = await dbClient.from("blocked").delete().eq("id", id);
+
+    if (deleteError) {
+      throw deleteError;
+    }
+
+    // remove locally from current blocked list
+    friends = friends.filter((friend) => friend.id !== id);
+
+    // re-render current page/list
+    handleRender(friends);
+  } catch (err) {
+    console.error("Failed to unblock friend:", err);
+  }
 }
 
 function handleRedirectBlocklist() {
